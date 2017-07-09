@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.example.abhay.blooddonationapp.MainActivity"
+        tools:showIn="@layout/app_bar_main">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Blood Group"
+                tools:layout_editor_absoluteX="39dp"
+                tools:layout_editor_absoluteY="26dp" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:prompt="@string/spinner_title"
+                tools:layout_editor_absoluteX="159dp"
+                tools:layout_editor_absoluteY="26dp" />
+            <!--<TextView-->
+                <!--android:id="@+id/blood_group"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="B+"-->
+                <!--tools:layout_editor_absoluteX="39dp"-->
+                <!--tools:layout_editor_absoluteY="26dp" />-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Name"
+                tools:layout_editor_absoluteX="39dp"
+                tools:layout_editor_absoluteY="155dp" />
+
+            <EditText
+                android:id="@+id/donorName"
+                android:layout_width="0dp"
+                android:layout_height="43dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Enter Name"
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="159dp"
+                tools:layout_editor_absoluteY="138dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Contact No"
+                tools:layout_editor_absoluteX="39dp"
+                tools:layout_editor_absoluteY="80dp" />
+
+            <EditText
+                android:id="@+id/donorContact"
+                android:layout_width="0dp"
+                android:layout_height="43dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Enter contact no"
+                android:inputType="phone"
+                tools:layout_editor_absoluteX="159dp"
+                tools:layout_editor_absoluteY="63dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Email I'd"
+                tools:layout_editor_absoluteX="39dp"
+                tools:layout_editor_absoluteY="80dp" />
+
+            <EditText
+                android:id="@+id/donorEmail"
+                android:layout_width="0dp"
+                android:layout_height="43dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Enter email id"
+                android:inputType="textEmailAddress"
+                tools:layout_editor_absoluteX="159dp"
+                tools:layout_editor_absoluteY="63dp" />
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_button"
+            android:text="Register" />
+    </LinearLayout>
+
+</LinearLayout>
