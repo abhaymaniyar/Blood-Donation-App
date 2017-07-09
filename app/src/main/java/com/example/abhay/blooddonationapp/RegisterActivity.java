@@ -80,7 +80,7 @@ public class RegisterActivity extends Activity {
                 String donorEmail = emailTextView.getText().toString();
                 bloodGroupSpinner = (Spinner) findViewById(R.id.spinner);
                 String bloodGroup = bloodGroupSpinner.getPrompt().toString();
-                Log.d(">>>>", "onClick: "+bloodGroup+" "+donorName+" "+donorEmail+" "+donorContact);
+                Log.d(">>>>", "onClick: " + bloodGroup + " " + donorName + " " + donorEmail + " " + donorContact);
                 new AsyncRegister().execute(bloodGroup, donorName, donorContact, donorEmail);
             }
         });
@@ -106,42 +106,49 @@ public class RegisterActivity extends Activity {
         protected String doInBackground(String... params) {
             URL url = null;
             try {
-                url = new URL("http://ngoindex.info/donor_register.php");
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return "Exception";
-            }
-            HttpURLConnection conn = null;
-            try {
+//                url = new URL("http://ngoindex.info/donor_register.php");
+//                url = new URL(URLEncoder.encode(url.toString(), "UTF-8"));
+//                Log.d(">>>>", "doInBackground:1 > "+url.toString());
+                HttpURLConnection conn = null;
+//                Uri.Builder builder = new Uri.Builder().appendQueryParameter("bGroup", params[0])
+//                        .appendQueryParameter("name", params[1])
+//                        .appendQueryParameter("contact", params[2])
+//                        .appendQueryParameter("email", params[3]);
+//                String encoded = URLEncoder.encode(builder.toString(), "UTF-8");
+//                Log.d(">>>>", "doInBackground: "+builder.toString());
+//                builder.query()
+                String uri = Uri.parse("http://ngoindex.info/donor_register.php").buildUpon().appendQueryParameter("bGroup", params[0])
+                        .appendQueryParameter("name", params[1])
+                        .appendQueryParameter("contact", params[2])
+                        .appendQueryParameter("email", params[3]).build().toString();
+
+//                String query = builder.build().getEncodedQuery();
+//                String encoded = URLEncoder.encode(uri,"UTF-8");
+                url = new URL(uri);
+//                Log.d(TAG, "URI: "+uri.toString());
+//                Log.d(TAG, "URI Encoded: "+e);
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setDoOutput(true);
                 conn.setDoInput(true);
-                Log.d(">>>>", "doInBackground: " + "heelo");
                 conn.setChunkedStreamingMode(0);
 
-                Uri.Builder builder = new Uri.Builder().appendQueryParameter("bGroup", params[0])
-                        .appendQueryParameter("name", params[1])
-                        .appendQueryParameter("contact", params[2])
-                        .appendQueryParameter("email", params[3]);
+                Log.d(">>>>", "doInBackground: "+uri);
 
-                String query = builder.build().getEncodedQuery();
-                Log.d(">>>>", "doInBackground: " + "hello hello");
-//                OutputStream outputStream = conn.getOutputStream();
-//                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-//                DataOutputStream writer = new DataOutputStream(conn.getOutputStream());
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
-                writer.write(query);
-                Log.d(">>>>", "doInBackground: "+writer.toString());
+                writer.write(String.valueOf(url));
                 writer.flush();
                 writer.close();
-//                }else{
-//                    Toast.makeText(RegisterActivity.this, "Failure", Toast.LENGTH_LONG).show();
-//                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return "Exception";
             } catch (IOException e) {
                 Log.d(">>>>", "doInBackground:2 " + e);
                 e.printStackTrace();
                 return "Exception";
+            }catch (Exception e){
+                e.printStackTrace();
+                return "E";
             }
             return "true";
         }
