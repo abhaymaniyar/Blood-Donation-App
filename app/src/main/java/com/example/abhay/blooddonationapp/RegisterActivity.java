@@ -81,7 +81,11 @@ public class RegisterActivity extends Activity {
                 bloodGroupSpinner = (Spinner) findViewById(R.id.spinner);
                 String bloodGroup = bloodGroupSpinner.getPrompt().toString();
                 Log.d(">>>>", "onClick: " + bloodGroup + " " + donorName + " " + donorEmail + " " + donorContact);
-                new AsyncRegister().execute(bloodGroup, donorName, donorContact, donorEmail);
+                if(!(donorName.equals("") || donorEmail.equals("") || donorContact.equals(""))){
+                    new AsyncRegister().execute(bloodGroup, donorName, donorContact, donorEmail);
+                }else{
+                    Toast.makeText(RegisterActivity.this, "Fill the details please.", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -106,34 +110,19 @@ public class RegisterActivity extends Activity {
         protected String doInBackground(String... params) {
             URL url = null;
             try {
-//                url = new URL("http://ngoindex.info/donor_register.php");
-//                url = new URL(URLEncoder.encode(url.toString(), "UTF-8"));
-//                Log.d(">>>>", "doInBackground:1 > "+url.toString());
                 HttpURLConnection conn = null;
-//                Uri.Builder builder = new Uri.Builder().appendQueryParameter("bGroup", params[0])
-//                        .appendQueryParameter("name", params[1])
-//                        .appendQueryParameter("contact", params[2])
-//                        .appendQueryParameter("email", params[3]);
-//                String encoded = URLEncoder.encode(builder.toString(), "UTF-8");
-//                Log.d(">>>>", "doInBackground: "+builder.toString());
-//                builder.query()
                 String uri = Uri.parse("http://ngoindex.info/donor_register.php").buildUpon().appendQueryParameter("bGroup", params[0])
                         .appendQueryParameter("name", params[1])
                         .appendQueryParameter("contact", params[2])
                         .appendQueryParameter("email", params[3]).build().toString();
-
-//                String query = builder.build().getEncodedQuery();
-//                String encoded = URLEncoder.encode(uri,"UTF-8");
                 url = new URL(uri);
-//                Log.d(TAG, "URI: "+uri.toString());
-//                Log.d(TAG, "URI Encoded: "+e);
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setDoOutput(true);
                 conn.setDoInput(true);
                 conn.setChunkedStreamingMode(0);
 
-                Log.d(">>>>", "doInBackground: "+uri);
+                Log.d(">>>>", "doInBackground: " + uri);
 
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
                 writer.write(String.valueOf(url));
@@ -146,7 +135,7 @@ public class RegisterActivity extends Activity {
                 Log.d(">>>>", "doInBackground:2 " + e);
                 e.printStackTrace();
                 return "Exception";
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 return "E";
             }
