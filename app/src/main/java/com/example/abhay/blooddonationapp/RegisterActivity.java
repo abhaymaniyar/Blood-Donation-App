@@ -1,6 +1,9 @@
 package com.example.abhay.blooddonationapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -73,16 +76,33 @@ public class RegisterActivity extends Activity {
             @Override
             public void onClick(View view) {
                 nameTextView = (TextView) findViewById(R.id.donorName);
-                String donorName = nameTextView.getText().toString();
+                final String donorName = nameTextView.getText().toString();
                 contactTextView = (TextView) findViewById(R.id.donorContact);
-                String donorContact = contactTextView.getText().toString();
+                final String donorContact = contactTextView.getText().toString();
                 emailTextView = (TextView) findViewById(R.id.donorEmail);
-                String donorEmail = emailTextView.getText().toString();
+                final String donorEmail = emailTextView.getText().toString();
                 bloodGroupSpinner = (Spinner) findViewById(R.id.spinner);
-                String bloodGroup = bloodGroupSpinner.getPrompt().toString();
+                final String bloodGroup = bloodGroupSpinner.getPrompt().toString();
                 Log.d(">>>>", "onClick: " + bloodGroup + " " + donorName + " " + donorEmail + " " + donorContact);
                 if(!(donorName.equals("") || donorEmail.equals("") || donorContact.equals(""))){
-                    new AsyncRegister().execute(bloodGroup, donorName, donorContact, donorEmail);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    builder.setTitle("");
+                    builder.setMessage("Are you sure the details are correct?");
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            new AsyncRegister().execute(bloodGroup, donorName, donorContact, donorEmail);
+                        }
+                    });
+
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
                 }else{
                     Toast.makeText(RegisterActivity.this, "Fill the details please.", Toast.LENGTH_LONG).show();
                 }
@@ -100,6 +120,8 @@ public class RegisterActivity extends Activity {
         protected void onPostExecute(String s) {
             if (s.equals("true")) {
                 Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(i);
             } else {
                 Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_LONG).show();
             }
