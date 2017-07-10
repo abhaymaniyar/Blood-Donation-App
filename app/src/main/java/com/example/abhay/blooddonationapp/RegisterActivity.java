@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -69,8 +70,8 @@ public class RegisterActivity extends Activity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(dataAdapter);
-
-
+        SharedPreferences sharedPreferences = RegisterActivity.this.getSharedPreferences("registered", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
         Button registerButton = (Button) findViewById(R.id.register_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +84,7 @@ public class RegisterActivity extends Activity {
                 final String donorEmail = emailTextView.getText().toString();
                 bloodGroupSpinner = (Spinner) findViewById(R.id.spinner);
                 final String bloodGroup = bloodGroupSpinner.getPrompt().toString();
+
                 Log.d(">>>>", "onClick: " + bloodGroup + " " + donorName + " " + donorEmail + " " + donorContact);
                 if(!(donorName.equals("") || donorEmail.equals("") || donorContact.equals(""))){
                     AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
@@ -92,6 +94,8 @@ public class RegisterActivity extends Activity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             new AsyncRegister().execute(bloodGroup, donorName, donorContact, donorEmail);
+                            editor.putBoolean("isRegistered", true);
+                            editor.commit();
                         }
                     });
 
