@@ -21,7 +21,7 @@
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Blood Group"
                 tools:layout_editor_absoluteX="39dp"
@@ -32,7 +32,9 @@
                 android:layout_width="0dp"
                 android:layout_height="20dp"
                 android:layout_weight="1"
+                android:textAlignment="center"
                 android:prompt="@string/spinner_title"
+                android:spinnerMode="dropdown"
                 tools:layout_editor_absoluteX="159dp"
                 tools:layout_editor_absoluteY="26dp" />
             <!--<TextView-->

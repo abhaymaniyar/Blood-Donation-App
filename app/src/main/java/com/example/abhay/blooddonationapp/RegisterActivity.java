@@ -47,7 +47,22 @@ public class RegisterActivity extends Activity {
         setContentView(R.layout.donor_registration);
 
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        
+
+        spinner.setPrompt("Select Blood Group");
+        List<String> bloodGroups = new ArrayList<String>();
+        bloodGroups.add("A+");
+        bloodGroups.add("B+");
+        bloodGroups.add("O+");
+        bloodGroups.add("B-");
+        bloodGroups.add("AB-");
+        bloodGroups.add("O-");
+
+//        set Adapter to Spinner items
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, bloodGroups);
+        dataAdapter.setDropDownViewResource(R.layout.spinner_item);
+        spinner.setAdapter(dataAdapter);
+
+//        select a bloodGroup and show it on spinner
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -61,19 +76,6 @@ public class RegisterActivity extends Activity {
             }
         });
 
-        List<String> bloodGroups = new ArrayList<String>();
-        bloodGroups.add("A+");
-        bloodGroups.add("B+");
-        bloodGroups.add("O+");
-        bloodGroups.add("B-");
-        bloodGroups.add("AB-");
-        bloodGroups.add("O-");
-
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, bloodGroups);
-
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinner.setAdapter(dataAdapter);
         SharedPreferences sharedPreferences = RegisterActivity.this.getSharedPreferences("registered", MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         Button registerButton = (Button) findViewById(R.id.register_button);
@@ -105,6 +107,7 @@ public class RegisterActivity extends Activity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 new AsyncRegister().execute(bloodGroup, donorName, donorContact, donorEmail);
+//                                save registration status in SharedPreferences
                                 editor.putBoolean("isRegistered", true);
                                 editor.commit();
                             }
