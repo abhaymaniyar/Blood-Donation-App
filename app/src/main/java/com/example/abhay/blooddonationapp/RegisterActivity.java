@@ -76,7 +76,7 @@ public class RegisterActivity extends Activity {
             }
         });
 
-        SharedPreferences sharedPreferences = RegisterActivity.this.getSharedPreferences("registered", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getSharedPreferences("registrationStatus", MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         Button registerButton = (Button) findViewById(R.id.register_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +109,10 @@ public class RegisterActivity extends Activity {
                                 new AsyncRegister().execute(bloodGroup, donorName, donorContact, donorEmail);
 //                                save registration status in SharedPreferences
                                 editor.putBoolean("isRegistered", true);
+                                editor.putString("donor_name_details", donorName);
+                                editor.putString("donor_email_details", donorEmail);
+                                editor.putString("donor_contact_details", donorContact);
+                                editor.putString("donor_blood_group_details", bloodGroup);
                                 editor.commit();
                             }
                         });

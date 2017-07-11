@@ -1,11 +1,11 @@
 package com.example.abhay.blooddonationapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,7 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -85,8 +85,15 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_search) {
             // Handle the camera action
         } else if (id == R.id.nav_register) {
-            Intent i = new Intent(this, RegisterActivity.class);
-            startActivity(i);
+            SharedPreferences sharedPreferences = this.getPreferences(MODE_PRIVATE);
+            boolean isRegistered = sharedPreferences.getBoolean("registrationStatus", false);
+            if (isRegistered){
+                Intent i = new Intent(this, DonorDetailsActivity.class);
+                startActivity(i);
+            }else{
+                Intent i = new Intent(this, RegisterActivity.class);
+                startActivity(i);
+            }
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_share) {
