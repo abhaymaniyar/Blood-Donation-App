@@ -15,7 +15,7 @@ public class DonorDetailsActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.donor_details);
 
-        SharedPreferences sharedPreferences = this.getPreferences(MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getSharedPreferences("registrationStatus", MODE_PRIVATE);
         String name = sharedPreferences.getString("donor_name_details", "Not yet Registered");
         String email = sharedPreferences.getString("donor_email_details", "Not yet Registered");
         String contact = sharedPreferences.getString("donor_contact_details", "Not yet Registered");
@@ -30,5 +30,12 @@ public class DonorDetailsActivity extends Activity{
         emailTextView.setText(email);
         contactTextView.setText(contact);
         bGroupTextView.setText(bGroup);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+//        Intent i = new Intent(this, MainActivity.class);
+//        startActivity(i);
     }
 }

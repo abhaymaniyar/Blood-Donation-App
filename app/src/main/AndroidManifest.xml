@@ -21,6 +21,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity"
+            android:label="Register as a Donor"
+            android:noHistory="true">
+
+        </activity>
+        <activity android:name=".DonorDetailsActivity"
             android:label="Register as a Donor">
 
         </activity>

@@ -1,5 +1,6 @@
 package com.example.abhay.blooddonationapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SharedPreferences sharedPreferences = this.getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -81,12 +84,17 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        String TAG = ">>>>";
         if (id == R.id.nav_search) {
             // Handle the camera action
         } else if (id == R.id.nav_register) {
-            SharedPreferences sharedPreferences = this.getPreferences(MODE_PRIVATE);
-            boolean isRegistered = sharedPreferences.getBoolean("registrationStatus", false);
+            SharedPreferences sharedPreferences = getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
+            boolean isRegistered = sharedPreferences.getBoolean("isRegistered", false);
+            Log.d(TAG, "onNavigationItemSelected: "+isRegistered);
+            Log.d(TAG, "onNavigationItemSelected: "+sharedPreferences.getString("donor_email_details", "hello"));
+            Log.d(TAG, "onNavigationItemSelected: "+sharedPreferences.getString("donor_contact_details", "hello"));
+            Log.d(TAG, "onNavigationItemSelected: "+sharedPreferences.getString("donor_name_details", "hello"));
+            Log.d(TAG, "onNavigationItemSelected: "+sharedPreferences.getString("donor_blood_group_details", "hello"));
             if (isRegistered){
                 Intent i = new Intent(this, DonorDetailsActivity.class);
                 startActivity(i);

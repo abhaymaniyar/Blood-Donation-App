@@ -45,8 +45,9 @@ public class RegisterActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.donor_registration);
-
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        final SharedPreferences sharedPreferences = this.getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
 
         spinner.setPrompt("Select Blood Group");
         List<String> bloodGroups = new ArrayList<String>();
@@ -76,8 +77,7 @@ public class RegisterActivity extends Activity {
             }
         });
 
-        SharedPreferences sharedPreferences = this.getSharedPreferences("registrationStatus", MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedPreferences.edit();
+
         Button registerButton = (Button) findViewById(R.id.register_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,12 +107,15 @@ public class RegisterActivity extends Activity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 new AsyncRegister().execute(bloodGroup, donorName, donorContact, donorEmail);
+
 //                                save registration status in SharedPreferences
                                 editor.putBoolean("isRegistered", true);
                                 editor.putString("donor_name_details", donorName);
+                                Log.d(">>>>", "onClick: "+sharedPreferences.getString("donor_name_details", "not entered"));
                                 editor.putString("donor_email_details", donorEmail);
                                 editor.putString("donor_contact_details", donorContact);
                                 editor.putString("donor_blood_group_details", bloodGroup);
+                                Log.d(">>>>", "onClick: "+sharedPreferences.getString("isRegistered", "not entered"));
                                 editor.commit();
                             }
                         });
@@ -153,7 +156,7 @@ public class RegisterActivity extends Activity {
         protected void onPostExecute(String s) {
             if (s.equals("true")) {
                 Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(RegisterActivity.this, MainActivity.class);
+                Intent i = new Intent(RegisterActivity.this, DonorDetailsActivity.class);
                 startActivity(i);
             } else {
                 Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_LONG).show();
