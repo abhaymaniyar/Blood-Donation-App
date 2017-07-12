@@ -90,12 +90,14 @@ public class RegisterActivity extends Activity {
                 final String donorEmail = emailTextView.getText().toString();
                 bloodGroupSpinner = (Spinner) findViewById(R.id.spinner);
                 final String bloodGroup = bloodGroupSpinner.getPrompt().toString();
+                EditText cityView = (EditText) findViewById(R.id.donorCity);
+                final String donorCity = cityView.getText().toString();
                 boolean isEmailValid = Patterns.EMAIL_ADDRESS.matcher(donorEmail).matches();
                 boolean isContactValid = Patterns.PHONE.matcher(donorContact).matches();
 
 //               Check for User details validation and integrity
                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                if(!(donorName.equals("") || donorEmail.equals("") || donorContact.equals(""))){
+                if(!(donorName.equals("") || donorEmail.equals("") || donorContact.equals("") || donorCity.equals(""))){
                     if (!isEmailValid){
                         validateInput((EditText) emailTextView, "Email Address");
                     }else if (!isContactValid){
@@ -106,7 +108,7 @@ public class RegisterActivity extends Activity {
                         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                new AsyncRegister().execute(bloodGroup, donorName, donorContact, donorEmail);
+                                new AsyncRegister().execute(bloodGroup, donorName, donorContact, donorEmail, donorCity);
 
 //                                save registration status in SharedPreferences
                                 editor.putBoolean("isRegistered", true);
@@ -115,6 +117,7 @@ public class RegisterActivity extends Activity {
                                 editor.putString("donor_email_details", donorEmail);
                                 editor.putString("donor_contact_details", donorContact);
                                 editor.putString("donor_blood_group_details", bloodGroup);
+                                editor.putString("donor_city_details", donorCity);
                                 Log.d(">>>>", "onClick: "+sharedPreferences.getString("isRegistered", "not entered"));
                                 editor.commit();
                             }
@@ -172,7 +175,8 @@ public class RegisterActivity extends Activity {
                 String uri = Uri.parse("http://ngoindex.info/donor_register.php").buildUpon().appendQueryParameter("bGroup", params[0])
                         .appendQueryParameter("name", params[1])
                         .appendQueryParameter("contact", params[2])
-                        .appendQueryParameter("email", params[3]).build().toString();
+                        .appendQueryParameter("email", params[3])
+                        .appendQueryParameter("city", params[4]).build().toString();
                 url = new URL(uri);
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");

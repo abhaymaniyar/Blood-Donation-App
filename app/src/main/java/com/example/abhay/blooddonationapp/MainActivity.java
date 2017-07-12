@@ -12,7 +12,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -90,11 +89,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_register) {
             SharedPreferences sharedPreferences = getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
             boolean isRegistered = sharedPreferences.getBoolean("isRegistered", false);
-            Log.d(TAG, "onNavigationItemSelected: "+isRegistered);
-            Log.d(TAG, "onNavigationItemSelected: "+sharedPreferences.getString("donor_email_details", "hello"));
-            Log.d(TAG, "onNavigationItemSelected: "+sharedPreferences.getString("donor_contact_details", "hello"));
-            Log.d(TAG, "onNavigationItemSelected: "+sharedPreferences.getString("donor_name_details", "hello"));
-            Log.d(TAG, "onNavigationItemSelected: "+sharedPreferences.getString("donor_blood_group_details", "hello"));
             if (isRegistered){
                 Intent i = new Intent(this, DonorDetailsActivity.class);
                 startActivity(i);

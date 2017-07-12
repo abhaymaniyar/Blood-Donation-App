@@ -127,6 +127,31 @@
                 tools:layout_editor_absoluteX="159dp"
                 tools:layout_editor_absoluteY="63dp" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="City"
+                tools:layout_editor_absoluteX="39dp"
+                tools:layout_editor_absoluteY="80dp" />
+
+            <EditText
+                android:id="@+id/donorCity"
+                android:layout_width="0dp"
+                android:layout_height="43dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Enter your city"
+                android:inputType="textEmailAddress"
+                tools:layout_editor_absoluteX="159dp"
+                tools:layout_editor_absoluteY="63dp" />
+        </LinearLayout>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
