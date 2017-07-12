@@ -94,7 +94,7 @@ public class RegisterActivity extends Activity {
                 final String donorCity = cityView.getText().toString();
                 boolean isEmailValid = Patterns.EMAIL_ADDRESS.matcher(donorEmail).matches();
                 boolean isContactValid = Patterns.PHONE.matcher(donorContact).matches();
-
+                int contactNumberLength = donorContact.length();
 //               Check for User details validation and integrity
                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                 if(!(donorName.equals("") || donorEmail.equals("") || donorContact.equals("") || donorCity.equals(""))){
@@ -102,12 +102,16 @@ public class RegisterActivity extends Activity {
                         validateInput((EditText) emailTextView, "Email Address");
                     }else if (!isContactValid){
                         validateInput((EditText) contactTextView, "Contact Number");
+                    }else if(contactNumberLength < 10){
+                        validateInput((EditText) contactTextView, "Contact Number");    
                     }else{
                         builder.setTitle("");
                         builder.setMessage("Are you sure the details are correct?");
                         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+
+//                                execute background registration thread
                                 new AsyncRegister().execute(bloodGroup, donorName, donorContact, donorEmail, donorCity);
 
 //                                save registration status in SharedPreferences
