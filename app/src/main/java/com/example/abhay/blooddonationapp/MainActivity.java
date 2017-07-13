@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +35,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity
         final Spinner spinner = (Spinner) findViewById(R.id.search_spinner);
         final List<String> bloodGroups = new ArrayList<String>();
         bloodGroups.add("A+");
+        bloodGroups.add("A");
         bloodGroups.add("B+");
         bloodGroups.add("O+");
         bloodGroups.add("B-");
@@ -203,11 +206,11 @@ public class MainActivity extends AppCompatActivity
         protected String doInBackground(String... strings) {
             URL url = null;
             String result = null;
-//            Log.d(">>>>URL ", "doInBackground: "+strings[1]);
+            Log.d(">>>>URL ", "doInBackground: "+strings[1]);
             try {
 //              Creating a http connection
-                String uri = Uri.parse("http://192.168.0.3/bdApp/search_donor.php").buildUpon().appendQueryParameter("bGroup", "'" + strings[0] + "'")
-                        .appendQueryParameter("city", "'" + strings[1] + "'").build().toString();
+                String uri = Uri.parse("http://ngoindex.info/search_donor.php").buildUpon().appendQueryParameter("bGroup", "'" + strings[0] + "'")
+                        .appendQueryParameter("city", "'"+strings[1]+"'").build().toString();
                 url = new URL(uri);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("GET");
@@ -232,7 +235,9 @@ public class MainActivity extends AppCompatActivity
                 Log.d(">>>>json: ", "doInBackground: " + result);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-            } catch (IOException e) {
+            }catch (ConnectException e){
+                Toast.makeText(MainActivity.this, "Connection timed out", Toast.LENGTH_LONG).show();
+            }catch (IOException e) {
                 e.printStackTrace();
             }
             return result;
@@ -247,7 +252,7 @@ public class MainActivity extends AppCompatActivity
                 Log.d(">>>>", "prepareDonorsList: "+jsonObject.getJSONObject(i));
                 JSONObject donorJsonObject = jsonObject.getJSONObject(i);
                 String name = donorJsonObject.getString("name");
-                String contact = donorJsonObject.getString("contact");
+                String contact = donorJsonObject.getString("contact_number");
                 String email = donorJsonObject.getString("email");
                 String city = donorJsonObject.getString("city");
 //                Log.d(">>>>", "prepareDonorsList: "+name+" "+city+" "+contact+" "+email);
