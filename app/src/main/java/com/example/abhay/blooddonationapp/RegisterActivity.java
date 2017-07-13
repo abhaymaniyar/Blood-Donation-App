@@ -201,9 +201,6 @@ public class RegisterActivity extends Activity {
                 Log.d(">>>>", "doInBackground:2 " + e);
                 e.printStackTrace();
                 return "Exception";
-            } catch (Exception e) {
-                e.printStackTrace();
-                return "E";
             }
             return "true";
         }
