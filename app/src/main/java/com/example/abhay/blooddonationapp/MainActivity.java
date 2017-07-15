@@ -3,19 +3,13 @@ package com.example.abhay.blooddonationapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,30 +18,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private List<Donor> donorsList = new ArrayList<>();
-    private RecyclerView recyclerView;
-    private DonorAdapter donorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +34,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        recyclerView = (RecyclerView) findViewById(R.id.donors_recycler_view);
-        donorAdapter = new DonorAdapter(donorsList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(donorAdapter);
+
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -119,9 +91,10 @@ public class MainActivity extends AppCompatActivity
                 String city = cityEditText.getText().toString();
                 Spinner spnr = (Spinner) findViewById(R.id.search_spinner);
                 String bGroup = spnr.getPrompt().toString();
-                donorsList.clear();
-                donorAdapter.notifyDataSetChanged();
-                new SearchAsyncTask().execute(bGroup, city);
+                Intent resultsActivity = new Intent(MainActivity.this, ResultsActivity.class);
+                resultsActivity.putExtra("city", city);
+                resultsActivity.putExtra("bGroup", bGroup);
+                startActivity(resultsActivity);
             }
         });
     }
@@ -187,82 +160,5 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private class SearchAsyncTask extends AsyncTask<String, String, String> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            prepareDonorsList(s);
-            Log.d(">>>>", "onPostExecute: " + s);
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-            URL url = null;
-            String result = null;
-            Log.d(">>>>URL ", "doInBackground: "+strings[1]);
-            try {
-//              Creating a http connection
-                String uri = Uri.parse("http://ngoindex.info/search_donor.php").buildUpon().appendQueryParameter("bGroup", "'" + strings[0] + "'")
-                        .appendQueryParameter("city", "'"+strings[1]+"'").build().toString();
-                url = new URL(uri);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setRequestMethod("GET");
-                httpURLConnection.setChunkedStreamingMode(0);
-                httpURLConnection.setDoInput(true);
-                httpURLConnection.setDoOutput(true);
-                Log.d(">>>>URL", "doInBackground: " + url);
-//              Writing link to the output stream of the http connection
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(httpURLConnection.getOutputStream()));
-                writer.write(String.valueOf(uri));
-                writer.flush();
-                writer.close();
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
-                StringBuilder strBuilder = new StringBuilder();
-                String line = null;
-                while ((line = reader.readLine()) != null) {
-                    strBuilder.append(line);
-                }
-                reader.close();
-                result = strBuilder.toString();
-                Log.d(">>>>json: ", "doInBackground: " + result);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }catch (ConnectException e){
-                Toast.makeText(MainActivity.this, "Connection timed out", Toast.LENGTH_LONG).show();
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
-            return result;
-        }
-    }
-
-    private void prepareDonorsList(String result){
-        try {
-            JSONArray jsonObject = new JSONArray(result);
-//            Log.d(">>>>", "prepareDonorsList: "+donorArray.toString());
-            for (int i = 0; i < jsonObject.length(); i++){
-                Log.d(">>>>", "prepareDonorsList: "+jsonObject.getJSONObject(i));
-                JSONObject donorJsonObject = jsonObject.getJSONObject(i);
-                String name = donorJsonObject.getString("name");
-                String contact = donorJsonObject.getString("contact_number");
-                String email = donorJsonObject.getString("email");
-                String city = donorJsonObject.getString("city");
-//                Log.d(">>>>", "prepareDonorsList: "+name+" "+city+" "+contact+" "+email);
-                Donor d = new Donor(name, city, contact, email);
-                donorsList.add(d);
-            }
-            donorAdapter.notifyDataSetChanged();
-//            jsonObject.getJSONObject(0);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 }

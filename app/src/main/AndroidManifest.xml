@@ -29,6 +29,10 @@
             android:label="Register as a Donor">
 
         </activity>
+        <activity android:name=".ResultsActivity"
+            android:label="Register as a Donor">
+
+        </activity>
     </application>
 
 </manifest>
