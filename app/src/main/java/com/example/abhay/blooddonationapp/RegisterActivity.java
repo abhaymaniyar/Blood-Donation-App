@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -57,6 +58,7 @@ public class RegisterActivity extends Activity {
         bloodGroups.add("B-");
         bloodGroups.add("AB-");
         bloodGroups.add("O-");
+        bloodGroups.add("B");
 
 //        set Adapter to Spinner items
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, bloodGroups);
@@ -95,16 +97,21 @@ public class RegisterActivity extends Activity {
                 boolean isEmailValid = Patterns.EMAIL_ADDRESS.matcher(donorEmail).matches();
                 boolean isContactValid = Patterns.PHONE.matcher(donorContact).matches();
                 int contactNumberLength = donorContact.length();
+                CheckBox frequentDonor = (CheckBox) findViewById(R.id.frequent_donor_check_box);
+                final String isFrequentDonor = frequentDonor.isChecked() ? "Yes" : "No";
+                CheckBox emergencyDonor = (CheckBox) findViewById(R.id.emergency_check_box);
+                final String isAvaiable = emergencyDonor.isChecked() ? "Yes" : "No";
+
 //               Check for User details validation and integrity
                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                if(!(donorName.equals("") || donorEmail.equals("") || donorContact.equals("") || donorCity.equals(""))){
-                    if (!isEmailValid){
+                if (!(donorName.equals("") || donorEmail.equals("") || donorContact.equals("") || donorCity.equals(""))) {
+                    if (!isEmailValid) {
                         validateInput((EditText) emailTextView, "Email Address");
-                    }else if (!isContactValid){
+                    } else if (!isContactValid) {
                         validateInput((EditText) contactTextView, "Contact Number");
-                    }else if(contactNumberLength < 10){
-                        validateInput((EditText) contactTextView, "Contact Number");    
-                    }else{
+                    } else if (contactNumberLength < 10) {
+                        validateInput((EditText) contactTextView, "Contact Number");
+                    } else {
                         builder.setTitle("");
                         builder.setMessage("Are you sure the details are correct?");
                         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -112,17 +119,19 @@ public class RegisterActivity extends Activity {
                             public void onClick(DialogInterface dialogInterface, int i) {
 
 //                                execute background registration thread
-                                new AsyncRegister().execute(bloodGroup, donorName, donorContact, donorEmail, donorCity);
+                                new AsyncRegister().execute(bloodGroup, donorName, donorContact, donorEmail, donorCity, isAvaiable, isFrequentDonor);
 
 //                                save registration status in SharedPreferences
                                 editor.putBoolean("isRegistered", true);
                                 editor.putString("donor_name_details", donorName);
-                                Log.d(">>>>", "onClick: "+sharedPreferences.getString("donor_name_details", "not entered"));
+                                Log.d(">>>>", "onClick: " + sharedPreferences.getString("donor_name_details", "not entered"));
                                 editor.putString("donor_email_details", donorEmail);
                                 editor.putString("donor_contact_details", donorContact);
                                 editor.putString("donor_blood_group_details", bloodGroup);
                                 editor.putString("donor_city_details", donorCity);
-                                Log.d(">>>>", "onClick: "+sharedPreferences.getString("isRegistered", "not entered"));
+                                editor.putString("donor_frequency_details", isFrequentDonor);
+                                editor.putString("donor_availablity_details", isAvaiable);
+                                Log.d(">>>>", "onClick: " + sharedPreferences.getString("isRegistered", "not entered"));
                                 editor.commit();
                             }
                         });
@@ -136,7 +145,7 @@ public class RegisterActivity extends Activity {
                         AlertDialog alertDialog = builder.create();
                         alertDialog.show();
                     }
-                }else{
+                } else {
                     builder.setTitle("");
                     builder.setMessage("Please fill all the details.");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -152,7 +161,25 @@ public class RegisterActivity extends Activity {
         });
     }
 
-//    Async task for network call and saving registration status
+    // Dialog to validate contact and email entries by the user
+    private void validateInput(final EditText view, String str) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+        builder.setTitle("");
+        builder.setMessage("Please Enter Valid " + str + ".");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                view.requestFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    //    Async task for network call and saving registration status
     private class AsyncRegister extends AsyncTask<String, String, String> {
         @Override
         protected void onPreExecute() {
@@ -180,7 +207,9 @@ public class RegisterActivity extends Activity {
                         .appendQueryParameter("name", params[1])
                         .appendQueryParameter("contact", params[2])
                         .appendQueryParameter("email", params[3])
-                        .appendQueryParameter("city", params[4]).build().toString();
+                        .appendQueryParameter("city", params[4])
+                        .appendQueryParameter("isavailable", params[5])
+                        .appendQueryParameter("frequentdonor", params[6]).build().toString();
                 url = new URL(uri);
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
@@ -204,24 +233,6 @@ public class RegisterActivity extends Activity {
             }
             return "true";
         }
-    }
-
-    // Dialog to validate contact and email entries by the user
-    private void validateInput(final EditText view, String str){
-        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-        builder.setTitle("");
-        builder.setMessage("Please Enter Valid "+str+".");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-                view.requestFocus();
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 }
 

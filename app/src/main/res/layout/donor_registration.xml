@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="20dp">
+            android:padding="15dp">
 
             <TextView
                 android:id="@+id/textView2"
@@ -32,26 +34,26 @@
                 android:layout_width="0dp"
                 android:layout_height="20dp"
                 android:layout_weight="1"
-                android:textAlignment="center"
                 android:prompt="@string/spinner_title"
                 android:spinnerMode="dropdown"
+                android:textAlignment="center"
                 tools:layout_editor_absoluteX="159dp"
                 tools:layout_editor_absoluteY="26dp" />
             <!--<TextView-->
-                <!--android:id="@+id/blood_group"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:text="B+"-->
-                <!--tools:layout_editor_absoluteX="39dp"-->
-                <!--tools:layout_editor_absoluteY="26dp" />-->
+            <!--android:id="@+id/blood_group"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="B+"-->
+            <!--tools:layout_editor_absoluteX="39dp"-->
+            <!--tools:layout_editor_absoluteY="26dp" />-->
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="20dp">
+            android:padding="15dp">
 
             <TextView
                 android:id="@+id/textView4"
@@ -78,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="20dp">
+            android:padding="15dp">
 
             <TextView
                 android:id="@+id/textView5"
@@ -105,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="20dp">
+            android:padding="15dp">
 
             <TextView
                 android:id="@+id/textView6"
@@ -127,11 +129,12 @@
                 tools:layout_editor_absoluteX="159dp"
                 tools:layout_editor_absoluteY="63dp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="20dp">
+            android:padding="15dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -152,10 +155,51 @@
                 tools:layout_editor_absoluteX="159dp"
                 tools:layout_editor_absoluteY="63dp" />
         </LinearLayout>
-        <Button
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Available for emergency situations?"
+                tools:layout_editor_absoluteX="39dp"
+                tools:layout_editor_absoluteY="80dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:id="@+id/emergency_check_box"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Are you a frequent donor?"
+                tools:layout_editor_absoluteX="39dp"
+                tools:layout_editor_absoluteY="80dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:id="@+id/frequent_donor_check_box"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <Button
             android:id="@+id/register_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Register" />
     </LinearLayout>
 
