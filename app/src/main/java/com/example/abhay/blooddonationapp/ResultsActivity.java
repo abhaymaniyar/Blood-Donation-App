@@ -126,7 +126,7 @@ public class ResultsActivity extends AppCompatActivity {
                 String isAvailable = donorJsonObject.getString("isavailable");
                 String isFDonor = donorJsonObject.getString("frequentdonor");
 //                Log.d(">>>>", "prepareDonorsList: "+name+" "+city+" "+contact+" "+email);
-                Donor d = new Donor(name, city, contact, email,isAvailable, isFDonor);
+                Donor d = new Donor(name, city, contact, email, isFDonor, isAvailable);
                 donorsList.add(d);
             }
             donorAdapter.notifyDataSetChanged();

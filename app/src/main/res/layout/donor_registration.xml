@@ -170,9 +170,9 @@
                 tools:layout_editor_absoluteX="39dp"
                 tools:layout_editor_absoluteY="80dp" />
 
-            <CheckBox
+            <Spinner
                 android:layout_width="wrap_content"
-                android:id="@+id/emergency_check_box"
+                android:id="@+id/emergency_spinner"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
@@ -190,9 +190,9 @@
                 tools:layout_editor_absoluteX="39dp"
                 tools:layout_editor_absoluteY="80dp" />
 
-            <CheckBox
+            <Spinner
                 android:layout_width="wrap_content"
-                android:id="@+id/frequent_donor_check_box"
+                android:id="@+id/frequent_donor_spinner"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 

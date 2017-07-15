@@ -17,7 +17,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -79,6 +78,38 @@ public class RegisterActivity extends Activity {
             }
         });
 
+        final Spinner frequentDonor = (Spinner) findViewById(R.id.frequent_donor_spinner);
+        final Spinner emergencyDonor = (Spinner) findViewById(R.id.emergency_spinner);
+        ArrayList<String> yesNoSpinnerItems = new ArrayList<>();
+        yesNoSpinnerItems.add("Yes");
+        yesNoSpinnerItems.add("No");
+        ArrayAdapter<String> yesNoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, yesNoSpinnerItems);
+        yesNoAdapter.setDropDownViewResource(R.layout.spinner_item);
+        frequentDonor.setAdapter(yesNoAdapter);
+        emergencyDonor.setAdapter(yesNoAdapter);
+        frequentDonor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = adapterView.getItemAtPosition(i).toString();
+                frequentDonor.setPrompt(item);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        emergencyDonor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = adapterView.getItemAtPosition(i).toString();
+                emergencyDonor.setPrompt(item);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
 
         Button registerButton = (Button) findViewById(R.id.register_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -97,10 +128,8 @@ public class RegisterActivity extends Activity {
                 boolean isEmailValid = Patterns.EMAIL_ADDRESS.matcher(donorEmail).matches();
                 boolean isContactValid = Patterns.PHONE.matcher(donorContact).matches();
                 int contactNumberLength = donorContact.length();
-                CheckBox frequentDonor = (CheckBox) findViewById(R.id.frequent_donor_check_box);
-                final String isFrequentDonor = frequentDonor.isChecked() ? "Yes" : "No";
-                CheckBox emergencyDonor = (CheckBox) findViewById(R.id.emergency_check_box);
-                final String isAvaiable = emergencyDonor.isChecked() ? "Yes" : "No";
+                final String isFrequentDonor = frequentDonor.getPrompt().toString();
+                final String isAvaiable = emergencyDonor.getPrompt().toString();
 
 //               Check for User details validation and integrity
                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
