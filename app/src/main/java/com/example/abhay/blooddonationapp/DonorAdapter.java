@@ -15,7 +15,7 @@ import java.util.List;
 public class DonorAdapter extends RecyclerView.Adapter<DonorAdapter.DonorViewHolder> {
     private List<Donor> donorList;
     public class DonorViewHolder extends RecyclerView.ViewHolder{
-        public TextView nameOfDonor, cityOfDonor, emailOfDonor, contactOfDonor;
+        public TextView nameOfDonor, cityOfDonor, emailOfDonor, contactOfDonor, availabilityStatus, frequencyStatus;
 
         public DonorViewHolder(View view){
             super(view);
@@ -23,6 +23,8 @@ public class DonorAdapter extends RecyclerView.Adapter<DonorAdapter.DonorViewHol
             cityOfDonor = (TextView) view.findViewById(R.id.search_result_city_details);
             contactOfDonor = (TextView) view.findViewById(R.id.search_result_contact_details);
             emailOfDonor = (TextView) view.findViewById(R.id.search_result_email_details);
+            availabilityStatus = (TextView) view.findViewById(R.id.is_available);
+            frequencyStatus = (TextView) view.findViewById(R.id.is_frequent_donor);
         }
     }
 
@@ -43,6 +45,8 @@ public class DonorAdapter extends RecyclerView.Adapter<DonorAdapter.DonorViewHol
         holder.emailOfDonor.setText(donor.getEmail());
         holder.contactOfDonor.setText(donor.getContact());
         holder.cityOfDonor.setText(donor.getCity());
+        holder.frequencyStatus.setText(donor.getIsFDonor());
+        holder.availabilityStatus.setText(donor.getIsAvailable());
     }
 
     @Override

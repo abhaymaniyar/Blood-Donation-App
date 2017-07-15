@@ -123,8 +123,10 @@ public class ResultsActivity extends AppCompatActivity {
                 String contact = donorJsonObject.getString("contact_number");
                 String email = donorJsonObject.getString("email");
                 String city = donorJsonObject.getString("city");
+                String isAvailable = donorJsonObject.getString("isavailable");
+                String isFDonor = donorJsonObject.getString("frequentdonor");
 //                Log.d(">>>>", "prepareDonorsList: "+name+" "+city+" "+contact+" "+email);
-                Donor d = new Donor(name, city, contact, email);
+                Donor d = new Donor(name, city, contact, email,isAvailable, isFDonor);
                 donorsList.add(d);
             }
             donorAdapter.notifyDataSetChanged();

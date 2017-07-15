@@ -9,12 +9,17 @@ public class Donor {
     private String contact;
     private String email;
     private String city;
+    private String isAvailable;
 
-    public Donor(String name, String city, String contact, String email){
+    private String isFDonor;
+
+    public Donor(String name, String city, String contact, String email, String isAvailable, String isFDonor){
         this.name = name;
         this.city = city;
         this.contact = contact;
         this.email = email;
+        this.isAvailable = isAvailable;
+        this.isFDonor = isFDonor;
     }
 
     public String getName() {
@@ -47,5 +52,21 @@ public class Donor {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getIsAvailable() {
+        return isAvailable;
+    }
+
+    public void setIsAvailable(String isAvailable) {
+        this.isAvailable = isAvailable;
+    }
+
+    public String getIsFDonor() {
+        return isFDonor;
+    }
+
+    public void setIsFDonor(String isFDonor) {
+        this.isFDonor = isFDonor;
     }
 }
