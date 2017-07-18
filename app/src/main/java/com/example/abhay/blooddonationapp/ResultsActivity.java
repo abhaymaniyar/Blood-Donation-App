@@ -1,5 +1,6 @@
 package com.example.abhay.blooddonationapp;
 
+import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,7 +37,7 @@ public class ResultsActivity extends AppCompatActivity {
     private DonorAdapter donorAdapter;
     private List<Donor> donorsList = new ArrayList<>();
     private RecyclerView recyclerView;
-
+    private ProgressDialog searchProgressDialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +55,11 @@ public class ResultsActivity extends AppCompatActivity {
         recyclerView.setAdapter(donorAdapter);
         donorsList.clear();
         donorAdapter.notifyDataSetChanged();
+        searchProgressDialog = new ProgressDialog(this);
+        searchProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        searchProgressDialog.setMessage("Loading Search Results...");
+        searchProgressDialog.setIndeterminate(true);
+        searchProgressDialog.setCanceledOnTouchOutside(false);
         new SearchAsyncTask().execute(bGroup, city);
     }
 
@@ -61,12 +67,14 @@ public class ResultsActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            searchProgressDialog.show();
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             prepareDonorsList(s);
+            searchProgressDialog.hide();
             Log.d(">>>>", "onPostExecute: " + s);
         }
 

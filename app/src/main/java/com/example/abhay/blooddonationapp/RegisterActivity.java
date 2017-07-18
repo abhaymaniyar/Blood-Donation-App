@@ -2,6 +2,7 @@ package com.example.abhay.blooddonationapp;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -40,7 +41,7 @@ public class RegisterActivity extends Activity {
     TextView contactTextView;
     TextView emailTextView;
     Spinner bloodGroupSpinner;
-
+    ProgressDialog registerProgressDialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -188,6 +189,12 @@ public class RegisterActivity extends Activity {
                 }
             }
         });
+
+        registerProgressDialog = new ProgressDialog(this);
+        registerProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        registerProgressDialog.setIndeterminate(true);
+        registerProgressDialog.setCanceledOnTouchOutside(false);
+        registerProgressDialog.setMessage("Registering Donor...");
     }
 
     // Dialog to validate contact and email entries by the user
@@ -212,19 +219,32 @@ public class RegisterActivity extends Activity {
     private class AsyncRegister extends AsyncTask<String, String, String> {
         @Override
         protected void onPreExecute() {
+            registerProgressDialog.show();
             super.onPreExecute();
         }
 
         @Override
         protected void onPostExecute(String s) {
             if (s.equals("true")) {
-                Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(RegisterActivity.this, DonorDetailsActivity.class);
-                startActivity(i);
+//                Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                builder.setTitle("Success!");
+                builder.setMessage("Donor Registration Successful");
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        Intent j = new Intent(RegisterActivity.this, DonorDetailsActivity.class);
+                        startActivity(j);
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             } else {
                 Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_LONG).show();
             }
             super.onPostExecute(s);
+            registerProgressDialog.hide();
         }
 
         @Override
