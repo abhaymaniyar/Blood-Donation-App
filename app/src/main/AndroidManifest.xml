@@ -34,6 +34,10 @@
             android:label="Search Results">
 
         </activity>
+        <activity android:name=".FaqActivity"
+            android:label="FAQ">
+
+        </activity>
     </application>
 
 </manifest>

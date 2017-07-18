@@ -151,6 +151,9 @@ public class MainActivity extends AppCompatActivity
             }
         } else if (id == R.id.nav_slideshow) {
 
+        } else if (id == R.id.nav_faq) {
+            Intent i = new Intent(this, FaqActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
