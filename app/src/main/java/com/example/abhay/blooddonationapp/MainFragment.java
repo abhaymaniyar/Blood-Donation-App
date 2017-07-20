@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -78,14 +79,18 @@ public class MainFragment extends Fragment {
         searchDonorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle = new Bundle();
                 EditText cityEditText = (EditText) getView().findViewById(R.id.search_city);
                 String city = cityEditText.getText().toString();
                 Spinner spnr = (Spinner) getView().findViewById(R.id.search_spinner);
                 String bGroup = spnr.getPrompt().toString();
                 Intent resultsActivity = new Intent(getContext(), ResultsActivity.class);
-                resultsActivity.putExtra("city", city);
-                resultsActivity.putExtra("bGroup", bGroup);
-                startActivity(resultsActivity);
+                Fragment fragment = new ResultsFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                bundle.putString("city", city);
+                bundle.putString("bGroup", bGroup);
+                fragment.setArguments(bundle);
+                fragmentManager.beginTransaction().replace(R.id.fragment_frame, fragment, "Other Fragment").commit();
             }
         });
     }
