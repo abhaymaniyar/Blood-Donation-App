@@ -23,14 +23,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
     ProgressDialog registerProgressDialog;
     Fragment donorDetialsFragment = new DonorDetailsFragment();
     FragmentManager fragmentManager;
-
+    boolean isConnected = false;
 
     public RegisterFragment() {
         super();
@@ -260,8 +261,21 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                 });
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
-            } else {
-                Toast.makeText(getContext(), "Registration Failed", Toast.LENGTH_LONG).show();
+            } else if(s.equals("No internet")){
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("");
+                builder.setMessage("No Internet Connectivity.");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        registerProgressDialog.hide();
+                        Fragment f = new MainFragment();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, f, "Main Fragment").commit();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
             super.onPostExecute(s);
             registerProgressDialog.hide();
@@ -270,6 +284,12 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
         @Override
         protected String doInBackground(String... params) {
             URL url = null;
+            try {
+                InetAddress inetAddress = InetAddress.getByName("google.com");
+                isConnected = !inetAddress.equals("");
+            } catch (UnknownHostException e) {
+                return "No internet";
+            }
             try {
                 HttpURLConnection conn = null;
                 String uri = Uri.parse("http://ngoindex.info/donor_register.php").buildUpon().appendQueryParameter("bGroup", params[0])

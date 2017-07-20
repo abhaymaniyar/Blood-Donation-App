@@ -76,7 +76,6 @@ public class MainFragment extends Fragment {
 
 //        onClick behavior of the search button
         Button searchDonorBtn = (Button) getView().findViewById(R.id.search_button);
-        final String[] check = {""};
         searchDonorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
