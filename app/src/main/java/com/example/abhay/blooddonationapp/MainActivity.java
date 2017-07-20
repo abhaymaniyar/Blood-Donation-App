@@ -1,12 +1,12 @@
 package com.example.abhay.blooddonationapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity
 
 
     private Fragment fragmentOther;
+    private FragmentTransaction fragmentTransaction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,11 +87,9 @@ public class MainActivity extends AppCompatActivity
             SharedPreferences sharedPreferences = getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
             boolean isRegistered = sharedPreferences.getBoolean("isRegistered", false);
             if (isRegistered) {
-                Intent i = new Intent(this, DonorDetailsActivity.class);
-                startActivity(i);
+                fragmentOther = new DonorDetailsFragment();
             } else {
-                Intent i = new Intent(this, RegisterActivity.class);
-                startActivity(i);
+                fragmentOther = new RegisterFragment();
             }
         } else if (id == R.id.nav_slideshow) {
 
@@ -102,7 +101,9 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, fragmentOther).commit();
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_frame, fragmentOther).commit();
+        fragmentTransaction.addToBackStack(null);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
