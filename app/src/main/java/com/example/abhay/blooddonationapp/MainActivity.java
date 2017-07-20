@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = new MainFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fragment_frame, fragment, "Main Fragment").commit();
-
+        setTitle("Search Donors");
+        
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -95,18 +96,22 @@ public class MainActivity extends AppCompatActivity
         String TAG = ">>>>";
         if (id == R.id.nav_search) {
             fragmentOther = new MainFragment();
+            setTitle("Search Donor");
         } else if (id == R.id.nav_register) {
             SharedPreferences sharedPreferences = getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
             boolean isRegistered = sharedPreferences.getBoolean("isRegistered", false);
             if (isRegistered) {
                 fragmentOther = new DonorDetailsFragment();
+                setTitle("Donor Details");
             } else {
                 fragmentOther = new RegisterFragment();
+                setTitle("Register as a Donor");
             }
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_faq) {
             fragmentOther = new FaqFragment();
+            setTitle("Blood Donation FAQ");
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
