@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import java.net.InetAddress;
@@ -75,8 +75,9 @@ public class MainFragment extends Fragment {
         });
 
 //        onClick behavior of the search button
-        Button searchDonorBtn = (Button) getView().findViewById(R.id.search_button);
-        searchDonorBtn.setOnClickListener(new View.OnClickListener() {
+//        Button searchDonorBtn = (Button) getView().findViewById(R.id.search_button);
+        LinearLayout linearLayout = (LinearLayout) getView().findViewById(R.id.button);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Bundle bundle = new Bundle();
