@@ -4,12 +4,13 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -43,6 +44,9 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
     TextView emailTextView;
     Spinner bloodGroupSpinner;
     ProgressDialog registerProgressDialog;
+    Fragment donorDetialsFragment = new DonorDetailsFragment();
+    FragmentManager fragmentManager;
+
 
     public RegisterFragment() {
         super();
@@ -251,8 +255,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
-                        Intent j = new Intent(getContext(), DonorDetailsActivity.class);
-                        startActivity(j);
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, new DonorDetailsFragment()).commit();
                     }
                 });
                 AlertDialog alertDialog = builder.create();
