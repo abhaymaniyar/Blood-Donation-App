@@ -183,7 +183,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                                 editor.putString("donor_city_details", donorCity);
                                 editor.putString("donor_frequency_details", isFrequentDonor);
                                 editor.putString("donor_availablity_details", isAvaiable);
-                                Log.d(">>>>", "onClick: " + sharedPreferences.getString("isRegistered", "not entered"));
+//                                Log.d(">>>>", "onClick: " + sharedPreferences.getString("isRegistered", "not entered"));
                                 editor.commit();
                             }
                         });
