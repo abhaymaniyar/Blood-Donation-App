@@ -14,7 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity
 
         Fragment fragment = new MainFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_frame, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.fragment_frame, fragment, "Main Fragment").commit();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -44,15 +44,22 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
     }
 
+    int i = 0;
     @Override
     public void onBackPressed() {
+        String str = getSupportFragmentManager().findFragmentById(R.id.fragment_frame).getTag();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            FrameLayout frameLayout = (FrameLayout)findViewById(R.id.fragment_frame);
-            frameLayout.removeAllViews();
-            super.onBackPressed();
+        }else if (str.equals("Main Fragment")){
+            i++;
+            if (i==2){
+                super.onBackPressed();
+            }else{
+                Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, new MainFragment(), "Main Fragment").commit();
         }
     }
 
@@ -105,8 +112,8 @@ public class MainActivity extends AppCompatActivity
         }
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_frame, fragmentOther).commit();
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.fragment_frame, fragmentOther, "Other Fragments").commit();
+//        fragmentTransaction.addToBackStack(null);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
