@@ -21,23 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"
-            android:label="Register as a Donor"
-            android:noHistory="true">
-
-        </activity>
-        <activity android:name=".DonorDetailsActivity"
-            android:label="Register as a Donor">
-
-        </activity>
-        <activity android:name=".ResultsActivity"
-            android:label="Search Results">
-
-        </activity>
-        <activity android:name=".FaqActivity"
-            android:label="FAQ">
-
-        </activity>
     </application>
 
 </manifest>

@@ -1,7 +1,6 @@
 package com.example.abhay.blooddonationapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -84,7 +83,6 @@ public class MainFragment extends Fragment {
                 String city = cityEditText.getText().toString();
                 Spinner spnr = (Spinner) getView().findViewById(R.id.search_spinner);
                 String bGroup = spnr.getPrompt().toString();
-                Intent resultsActivity = new Intent(getContext(), ResultsActivity.class);
                 Fragment fragment = new ResultsFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 bundle.putString("city", city);
