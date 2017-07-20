@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
+    private Fragment fragmentOther;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,15 +32,8 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.fragment_frame, fragment).commit();
 
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -87,7 +81,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         String TAG = ">>>>";
         if (id == R.id.nav_search) {
-            // Handle the camera action
+            fragmentOther = new MainFragment();
         } else if (id == R.id.nav_register) {
             SharedPreferences sharedPreferences = getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
             boolean isRegistered = sharedPreferences.getBoolean("isRegistered", false);
@@ -101,13 +95,14 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_faq) {
-            Intent i = new Intent(this, FaqActivity.class);
-            startActivity(i);
+            fragmentOther = new FaqFragment();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
         }
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, fragmentOther).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

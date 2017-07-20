@@ -23,7 +23,7 @@ import java.util.List;
  * Created by abhay on 20/7/17.
  */
 
-public class MainFragment extends Fragment{
+public class MainFragment extends Fragment {
     public MainFragment() {
         super();
     }
@@ -43,21 +43,6 @@ public class MainFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
-//        Toolbar toolbar = (Toolbar) getView().findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-//        NavigationView navigationView = (NavigationView) getView().findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
 
         final Spinner spinner = (Spinner) getView().findViewById(R.id.search_spinner);
         final List<String> bloodGroups = new ArrayList<String>();
