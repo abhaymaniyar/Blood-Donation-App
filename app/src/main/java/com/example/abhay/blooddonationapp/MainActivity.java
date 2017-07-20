@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity
 
     private Fragment fragmentOther;
     private FragmentTransaction fragmentTransaction;
+    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fragment_frame, fragment, "Main Fragment").commit();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity
             }
         }else{
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, new MainFragment(), "Main Fragment").commit();
+            navigationView.getMenu().getItem(0).setChecked(true);
         }
     }
 
