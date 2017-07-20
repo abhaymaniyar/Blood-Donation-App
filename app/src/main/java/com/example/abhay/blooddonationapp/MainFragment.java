@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,10 +76,11 @@ public class MainFragment extends Fragment {
 
 //        onClick behavior of the search button
         Button searchDonorBtn = (Button) getView().findViewById(R.id.search_button);
+        final String[] check = {""};
         searchDonorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle = new Bundle();
+                final Bundle bundle = new Bundle();
                 EditText cityEditText = (EditText) getView().findViewById(R.id.search_city);
                 String city = cityEditText.getText().toString();
                 Spinner spnr = (Spinner) getView().findViewById(R.id.search_spinner);
@@ -87,6 +89,15 @@ public class MainFragment extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 bundle.putString("city", city);
                 bundle.putString("bGroup", bGroup);
+//                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+//                StrictMode.setThreadPolicy(policy);
+//                new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        check[0] = String.valueOf(checkInternetConnectivity());
+//                    }
+//                }).start();
+//                bundle.putString("isConnected", check[0]);
                 fragment.setArguments(bundle);
                 fragmentManager.beginTransaction().replace(R.id.fragment_frame, fragment, "Other Fragment").commit();
             }
@@ -106,5 +117,14 @@ public class MainFragment extends Fragment {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean checkInternetConnectivity(){
+        try {
+            InetAddress inetAddress = InetAddress.getByName("google.com");
+            return !inetAddress.equals("");
+        } catch (Exception e) {
+            return  false;
+        }
     }
 }

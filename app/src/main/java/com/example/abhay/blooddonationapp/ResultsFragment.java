@@ -1,6 +1,8 @@
 package com.example.abhay.blooddonationapp;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,10 +28,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by abhay on 20/7/17.
@@ -64,6 +70,7 @@ public class ResultsFragment extends Fragment {
         String bGroup = b.getString("bGroup");
         Log.d(">>>>", "onCreate: " + city);
         Log.d(">>>>", "onCreate: " + bGroup);
+        String connectivity = b.getString("isConnected");
         recyclerView = (RecyclerView) getView().findViewById(R.id.donors_recycler_view);
         donorAdapter = new DonorAdapter(donorsList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
@@ -80,6 +87,7 @@ public class ResultsFragment extends Fragment {
         new SearchAsyncTask().execute(bGroup, city);
     }
 
+    boolean isConnected = false;
     private class SearchAsyncTask extends AsyncTask<String, String, String> {
         @Override
         protected void onPreExecute() {
@@ -90,48 +98,88 @@ public class ResultsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            prepareDonorsList(s);
-            searchProgressDialog.hide();
+            if (s == null){
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("");
+                builder.setMessage("No Internet Connectivity.");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        searchProgressDialog.hide();
+                        Fragment f = new MainFragment();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, f, "Main Fragment").commit();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }else{
+                prepareDonorsList(s);
+                searchProgressDialog.hide();
+            }
             Log.d(">>>>", "onPostExecute: " + s);
         }
 
         @Override
         protected String doInBackground(String... strings) {
+            try {
+                InetAddress inetAddress = InetAddress.getByName("google.com");
+                isConnected = !inetAddress.equals("");
+            } catch (UnknownHostException e) {
+                return null;
+            }
             URL url = null;
             String result = null;
-            Log.d(">>>>URL ", "doInBackground: " + strings[1]);
-            try {
-//              Creating a http connection
-                String uri = Uri.parse("http://ngoindex.info/search_donor.php").buildUpon().appendQueryParameter("bGroup", "'" + strings[0] + "'")
-                        .appendQueryParameter("city", "'" + strings[1] + "'").build().toString();
-                url = new URL(uri);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setRequestMethod("GET");
-                httpURLConnection.setChunkedStreamingMode(0);
-                httpURLConnection.setDoInput(true);
-                httpURLConnection.setDoOutput(true);
-                Log.d(">>>>URL", "doInBackground: " + url);
-//              Writing link to the output stream of the http connection
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(httpURLConnection.getOutputStream()));
-                writer.write(String.valueOf(uri));
-                writer.flush();
-                writer.close();
+            if (isConnected == true){
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
-                StringBuilder strBuilder = new StringBuilder();
-                String line = null;
-                while ((line = reader.readLine()) != null) {
-                    strBuilder.append(line);
+                Log.d(">>>>URL ", "doInBackground: " + strings[1]);
+                try {
+//              Creating a http connection
+                    String uri = Uri.parse("http://ngoindex.info/search_donor.php").buildUpon().appendQueryParameter("bGroup", "'" + strings[0] + "'")
+                            .appendQueryParameter("city", "'" + strings[1] + "'").build().toString();
+                    url = new URL(uri);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    httpURLConnection.setRequestMethod("GET");
+                    httpURLConnection.setChunkedStreamingMode(0);
+                    httpURLConnection.setDoInput(true);
+                    httpURLConnection.setDoOutput(true);
+                    Log.d(">>>>URL", "doInBackground: " + url);
+//              Writing link to the output stream of the http connection
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(httpURLConnection.getOutputStream()));
+                    writer.write(String.valueOf(uri));
+                    writer.flush();
+                    writer.close();
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+                    StringBuilder strBuilder = new StringBuilder();
+                    String line = null;
+                    while ((line = reader.readLine()) != null) {
+                        strBuilder.append(line);
+                    }
+                    reader.close();
+                    result = strBuilder.toString();
+                    Log.d(">>>>json: ", "doInBackground: " + result);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (ConnectException e) {
+                    Toast.makeText(getContext(), "Connection timed out", Toast.LENGTH_LONG).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                reader.close();
-                result = strBuilder.toString();
-                Log.d(">>>>json: ", "doInBackground: " + result);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (ConnectException e) {
-                Toast.makeText(getContext(), "Connection timed out", Toast.LENGTH_LONG).show();
-            } catch (IOException e) {
-                e.printStackTrace();
+            }else {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("");
+                builder.setMessage("No Internet Connectivity.");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        Fragment f = new MainFragment();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, f, "Main Fragment").commit();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
             return result;
         }
@@ -157,6 +205,7 @@ public class ResultsFragment extends Fragment {
             donorAdapter.notifyDataSetChanged();
 //            jsonObject.getJSONObject(0);
         } catch (JSONException e) {
+            Log.d(TAG, "prepareDonorsList: "+e.toString());
             e.printStackTrace();
         }
     }
