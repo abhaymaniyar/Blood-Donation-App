@@ -51,15 +51,28 @@
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/search_result_city_details"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:text="City"
-                        android:textStyle="bold" />
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_location_on_black_24dp" />
+
+                        <TextView
+                            android:id="@+id/search_result_city_details"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="City"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -170,28 +183,10 @@
                 android:orientation="horizontal"
                 android:paddingTop="1dp">
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#fff"
-                    android:gravity="center"
-                    android:paddingBottom="3dp"
-                    android:paddingTop="3dp">
-
-                    <ImageView
-                        android:id="@+id/share_contact_imageview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_share_black_24dp" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
                     android:layout_weight="1"
                     android:background="#fff"
                     android:gravity="center"
@@ -209,6 +204,8 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:layout_weight="1"
                     android:background="#fff"
                     android:gravity="center"
@@ -223,7 +220,22 @@
                         android:src="@drawable/ic_email_black_24dp" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#fff"
+                    android:gravity="center"
+                    android:paddingBottom="3dp"
+                    android:paddingTop="3dp">
 
+                    <ImageView
+                        android:id="@+id/share_contact_imageview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_share_black_24dp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

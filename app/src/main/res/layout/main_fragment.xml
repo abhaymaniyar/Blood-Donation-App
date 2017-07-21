@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#beb71c1c"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.abhay.blooddonationapp.MainActivity">
 
@@ -13,122 +13,130 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="20dp"
-        android:elevation="20dp"
         android:background="?android:colorBackground"
+        android:elevation="20dp"
         app:cardCornerRadius="15dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/d1" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="50dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/d1" />
+
             <LinearLayout
-                android:id="@+id/linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:layout_gravity="center_vertical"
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/linear_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="30dp"
-                    android:gravity="center"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Blood Group"
-                        android:textSize="25sp"
-                        android:textColor="@color/redTextColor"
-                        android:textStyle="bold"
-                        tools:layout_editor_absoluteX="39dp"
-                        tools:layout_editor_absoluteY="26dp" />
-
-                    <Spinner
-                        android:id="@+id/search_spinner"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_gravity="center_horizontal"
-                        tools:layout_editor_absoluteX="159dp"
-                        tools:layout_editor_absoluteY="26dp" />
+                        android:layout_margin="30dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Blood Group"
+                            android:textColor="@color/redTextColor"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            tools:layout_editor_absoluteX="39dp"
+                            tools:layout_editor_absoluteY="26dp" />
+
+                        <Spinner
+                            android:id="@+id/search_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginLeft="40dp"
+                            android:gravity="center_horizontal"
+                            android:layout_marginRight="40dp"
+                            android:layout_marginTop="15dp"
+                            tools:layout_editor_absoluteX="159dp"
+                            tools:layout_editor_absoluteY="26dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Preferred City"
+                            android:textColor="@color/redTextColor"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            tools:layout_editor_absoluteX="39dp"
+                            tools:layout_editor_absoluteY="155dp" />
+
+                        <EditText
+                            android:id="@+id/search_city"
+                            android:layout_width="wrap_content"
+                            android:layout_height="43dp"
+                            android:layout_marginTop="15dp"
+                            android:background="@drawable/custom_edittext"
+                            android:ems="10"
+                            android:gravity="center"
+                            android:hint="Enter preferred city"
+                            android:inputType="textCapWords"
+                            android:textColorHint="@color/editTextBg"
+                            tools:layout_editor_absoluteX="159dp"
+                            tools:layout_editor_absoluteY="138dp" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="20dp">
+                    android:layout_gravity="center"
+                    android:background="@drawable/search_button_bg"
+                    android:layout_marginBottom="20dp"
+                    android:padding="5dp">
 
-                    <TextView
-                        android:id="@+id/textView4"
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Preferred City"
-                        android:textSize="25sp"
-                        android:textColor="@color/redTextColor"
-                        android:textStyle="bold"
-                        tools:layout_editor_absoluteX="39dp"
-                        tools:layout_editor_absoluteY="155dp" />
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_search_white_24dp" />
 
-                    <EditText
-                        android:id="@+id/search_city"
+                    <TextView
+                        android:id="@+id/search_button"
                         android:layout_width="wrap_content"
-                        android:layout_height="43dp"
-                        android:ems="10"
-                        android:gravity="center"
-                        android:hint="Enter preferred city"
-                        android:inputType="textPersonName"
-                        android:layout_marginTop="15dp"
-                        android:textColorHint="@color/redTextColor"
-                        android:background="@drawable/custom_edittext"
-                        tools:layout_editor_absoluteX="159dp"
-                        tools:layout_editor_absoluteY="138dp" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:paddingBottom="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
+                        android:text="Search"
+                        android:textColor="#fff"
+                        android:textStyle="bold" />
                 </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/search_button_bg"
-                android:padding="10dp"
-                android:layout_marginTop="50dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_search_white_24dp" />
-
-                <TextView
-                    android:id="@+id/search_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
-                    android:text="Search"
-                    android:paddingBottom="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingTop="10dp"
-                    android:textColor="#fff"
-                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

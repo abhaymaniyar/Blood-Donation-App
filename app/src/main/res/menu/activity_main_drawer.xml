@@ -11,10 +11,6 @@
             android:icon="@drawable/ic_assignment_black_24dp"
             android:title="Register" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Notifications" />
-        <item
             android:id="@+id/nav_faq"
             android:icon="@drawable/ic_help_black_24dp"
             android:title="FAQs"/>

@@ -107,8 +107,6 @@ public class MainActivity extends AppCompatActivity
                 fragmentOther = new RegisterFragment();
                 setTitle("Register as a Donor");
             }
-        } else if (id == R.id.nav_slideshow) {
-
         } else if (id == R.id.nav_faq) {
             fragmentOther = new FaqFragment();
             setTitle("Blood Donation FAQ");
