@@ -19,8 +19,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -134,7 +134,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
             }
         });
 
-        Button registerButton = (Button) getView().findViewById(R.id.register_button);
+        LinearLayout registerButton = (LinearLayout) getView().findViewById(R.id.register_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

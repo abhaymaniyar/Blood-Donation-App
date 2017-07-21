@@ -4,203 +4,239 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#beb71c1c">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="com.example.abhay.blooddonationapp.MainActivity"
-        tools:showIn="@layout/app_bar_main">
+        android:layout_margin="20dp"
+        app:cardCornerRadius="15dp"
+        android:background="?android:colorBackground">
 
-        <LinearLayout
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="15dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context="com.example.abhay.blooddonationapp.MainActivity"
+            tools:showIn="@layout/app_bar_main">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Blood Group"
-                tools:layout_editor_absoluteX="39dp"
-                tools:layout_editor_absoluteY="26dp" />
-
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="0dp"
-                android:layout_height="20dp"
-                android:layout_weight="1"
-                android:prompt="@string/spinner_title"
-                android:spinnerMode="dropdown"
-                android:textAlignment="center"
-                tools:layout_editor_absoluteX="159dp"
-                tools:layout_editor_absoluteY="26dp" />
-            <!--<TextView-->
-            <!--android:id="@+id/blood_group"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="B+"-->
-            <!--tools:layout_editor_absoluteX="39dp"-->
-            <!--tools:layout_editor_absoluteY="26dp" />-->
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="15dp">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Name"
-                tools:layout_editor_absoluteX="39dp"
-                tools:layout_editor_absoluteY="155dp" />
+                android:orientation="horizontal"
+                android:padding="20dp">
 
-            <EditText
-                android:id="@+id/donorName"
-                android:layout_width="0dp"
-                android:layout_height="43dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Enter Name"
-                android:inputType="textPersonName"
-                tools:layout_editor_absoluteX="159dp"
-                tools:layout_editor_absoluteY="138dp" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Blood Group"
+                    tools:layout_editor_absoluteX="39dp"
+                    tools:layout_editor_absoluteY="26dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="15dp">
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:prompt="@string/spinner_title"
+                    android:spinnerMode="dropdown"
+                    android:textAlignment="center"
+                    android:textColorHint="@color/redTextColor"
+                    tools:layout_editor_absoluteX="159dp"
+                    tools:layout_editor_absoluteY="26dp" />
+                <!--<TextView-->
+                <!--android:id="@+id/blood_group"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="B+"-->
+                <!--tools:layout_editor_absoluteX="39dp"-->
+                <!--tools:layout_editor_absoluteY="26dp" />-->
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Contact No"
-                tools:layout_editor_absoluteX="39dp"
-                tools:layout_editor_absoluteY="80dp" />
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-            <EditText
-                android:id="@+id/donorContact"
-                android:layout_width="0dp"
-                android:layout_height="43dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Enter contact no"
-                android:inputType="phone"
-                tools:layout_editor_absoluteX="159dp"
-                tools:layout_editor_absoluteY="63dp" />
-        </LinearLayout>
+                <!--<TextView-->
+                <!--android:id="@+id/textView4"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="Name"-->
+                <!--tools:layout_editor_absoluteX="39dp"-->
+                <!--tools:layout_editor_absoluteY="155dp" />-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="15dp">
+                <EditText
+                    android:id="@+id/donorName"
+                    android:layout_width="0dp"
+                    android:layout_height="43dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_edittext"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="Enter Name"
+                    android:inputType="textPersonName"
+                    android:textColorHint="@color/redTextColor"
+                    tools:layout_editor_absoluteX="159dp"
+                    tools:layout_editor_absoluteY="138dp" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Email I'd"
-                tools:layout_editor_absoluteX="39dp"
-                tools:layout_editor_absoluteY="80dp" />
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-            <EditText
-                android:id="@+id/donorEmail"
-                android:layout_width="0dp"
-                android:layout_height="43dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Enter email id"
-                android:inputType="textEmailAddress"
-                tools:layout_editor_absoluteX="159dp"
-                tools:layout_editor_absoluteY="63dp" />
-        </LinearLayout>
+                <!--<TextView-->
+                <!--android:id="@+id/textView5"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="Contact No"-->
+                <!--tools:layout_editor_absoluteX="39dp"-->
+                <!--tools:layout_editor_absoluteY="80dp" />-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="15dp">
+                <EditText
+                    android:id="@+id/donorContact"
+                    android:layout_width="0dp"
+                    android:layout_height="43dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_edittext"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="Enter contact no"
+                    android:inputType="phone"
+                    android:textColorHint="@color/redTextColor"
+                    tools:layout_editor_absoluteX="159dp"
+                    tools:layout_editor_absoluteY="63dp" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="City"
-                tools:layout_editor_absoluteX="39dp"
-                tools:layout_editor_absoluteY="80dp" />
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-            <EditText
-                android:id="@+id/donorCity"
-                android:layout_width="0dp"
-                android:layout_height="43dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Enter your city"
-                android:inputType="textEmailAddress"
-                tools:layout_editor_absoluteX="159dp"
-                tools:layout_editor_absoluteY="63dp" />
-        </LinearLayout>
+                <!--<TextView-->
+                <!--android:id="@+id/textView6"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="Email I'd"-->
+                <!--tools:layout_editor_absoluteX="39dp"-->
+                <!--tools:layout_editor_absoluteY="80dp" />-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="15dp">
+                <EditText
+                    android:id="@+id/donorEmail"
+                    android:layout_width="0dp"
+                    android:layout_height="43dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_edittext"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="Enter email id"
+                    android:inputType="textEmailAddress"
+                    android:textColorHint="@color/redTextColor"
+                    tools:layout_editor_absoluteX="159dp"
+                    tools:layout_editor_absoluteY="63dp" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Available for emergency situations?"
-                tools:layout_editor_absoluteX="39dp"
-                tools:layout_editor_absoluteY="80dp" />
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-            <Spinner
+
+                <EditText
+                    android:id="@+id/donorCity"
+                    android:layout_width="0dp"
+                    android:layout_height="43dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_edittext"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="Enter your city"
+                    android:inputType="textEmailAddress"
+                    android:textColorHint="@color/redTextColor"
+                    tools:layout_editor_absoluteX="159dp"
+                    tools:layout_editor_absoluteY="63dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Available for emergency situations?"
+                    tools:layout_editor_absoluteX="39dp"
+                    tools:layout_editor_absoluteY="80dp" />
+
+                <Spinner
+                    android:id="@+id/emergency_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Are you a frequent donor?"
+                    tools:layout_editor_absoluteX="39dp"
+                    tools:layout_editor_absoluteY="80dp" />
+
+                <Spinner
+                    android:id="@+id/frequent_donor_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/register_button"
                 android:layout_width="wrap_content"
-                android:id="@+id/emergency_spinner"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="15dp">
-
-            <TextView
-                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Are you a frequent donor?"
-                tools:layout_editor_absoluteX="39dp"
-                tools:layout_editor_absoluteY="80dp" />
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@drawable/search_button_bg">
 
-            <Spinner
-                android:layout_width="wrap_content"
-                android:id="@+id/frequent_donor_spinner"
-                android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/register_button" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:text="Register"
+                    android:textColor="#fff" />
+            </LinearLayout>
         </LinearLayout>
-
-        <Button
-            android:id="@+id/register_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Register" />
-    </LinearLayout>
-
+    </android.support.v7.widget.CardView>
 </LinearLayout>
