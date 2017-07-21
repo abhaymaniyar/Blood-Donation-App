@@ -38,6 +38,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Blood Group"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
                     android:gravity="center"
                     tools:layout_editor_absoluteX="39dp"
                     tools:layout_editor_absoluteY="26dp" />
@@ -207,6 +209,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
                     android:text="Available for emergency situations?"
                     tools:layout_editor_absoluteX="39dp"
                     tools:layout_editor_absoluteY="80dp" />
@@ -232,6 +236,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
                     android:text="Are you a frequent donor?"
                     tools:layout_editor_absoluteX="39dp"
                     tools:layout_editor_absoluteY="80dp" />

@@ -112,8 +112,9 @@ public class MainActivity extends AppCompatActivity
             setTitle("Blood Donation FAQ");
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.about_us) {
+            fragmentOther = new AboutUsFragment();
+            setTitle("About Me");
         }
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
