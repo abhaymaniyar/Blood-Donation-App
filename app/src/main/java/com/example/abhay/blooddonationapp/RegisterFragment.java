@@ -262,6 +262,10 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
             } else if(s.equals("No internet")){
+                final SharedPreferences sharedPreferences = getContext().getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
+                final SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("isRegistered", false);
+                editor.commit();
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("");
                 builder.setMessage("No Internet Connectivity.");
