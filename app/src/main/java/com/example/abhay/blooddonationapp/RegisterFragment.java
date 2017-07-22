@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,13 +73,14 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
 
         spinner.setPrompt("Select Blood Group");
         List<String> bloodGroups = new ArrayList<String>();
-        bloodGroups.add("A+");
-        bloodGroups.add("B+");
         bloodGroups.add("O+");
+        bloodGroups.add("O-");
+        bloodGroups.add("A+");
+        bloodGroups.add("A-");
+        bloodGroups.add("B+");
         bloodGroups.add("B-");
         bloodGroups.add("AB-");
-        bloodGroups.add("O-");
-        bloodGroups.add("B");
+        bloodGroups.add("AB+");
 
 //        set Adapter to Spinner items
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, bloodGroups);

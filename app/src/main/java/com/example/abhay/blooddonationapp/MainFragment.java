@@ -46,14 +46,14 @@ public class MainFragment extends Fragment {
 
         final Spinner spinner = (Spinner) getView().findViewById(R.id.search_spinner);
         final List<String> bloodGroups = new ArrayList<String>();
-        bloodGroups.add("A+");
-        bloodGroups.add("A");
-        bloodGroups.add("B+");
         bloodGroups.add("O+");
+        bloodGroups.add("O-");
+        bloodGroups.add("A+");
+        bloodGroups.add("A-");
+        bloodGroups.add("B+");
         bloodGroups.add("B-");
         bloodGroups.add("AB-");
-        bloodGroups.add("O-");
-        bloodGroups.add("B");
+        bloodGroups.add("AB+");
         //        set Adapter to Spinner items
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, bloodGroups);
         dataAdapter.setDropDownViewResource(R.layout.spinner_item);
