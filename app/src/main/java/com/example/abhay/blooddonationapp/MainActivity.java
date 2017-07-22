@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity
     private Fragment fragmentOther;
     private FragmentTransaction fragmentTransaction;
     NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fragment_frame, fragment, "Main Fragment").commit();
         setTitle("Search Donors");
-        
+
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -47,20 +48,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     int i = 0;
+
     @Override
     public void onBackPressed() {
         String str = getSupportFragmentManager().findFragmentById(R.id.fragment_frame).getTag();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }else if (str.equals("Main Fragment")){
+        } else if (str.equals("Main Fragment")) {
             i++;
-            if (i==2){
+            if (i == 2) {
                 super.onBackPressed();
-            }else{
+            } else {
                 Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
             }
-        }else{
+        } else {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, new MainFragment(), "Main Fragment").commit();
             setTitle("Search Donors");
             navigationView.getMenu().getItem(0).setChecked(true);
@@ -74,20 +76,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
