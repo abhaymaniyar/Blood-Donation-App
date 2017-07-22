@@ -35,7 +35,7 @@ public class DonorDetailsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        getActivity().setTitle("Donor Details");
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("registrationStatus", MODE_PRIVATE);
         String name = sharedPreferences.getString("donor_name_details", "Not yet Registered");
         String email = sharedPreferences.getString("donor_email_details", "Not yet Registered");

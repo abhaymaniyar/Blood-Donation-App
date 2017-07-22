@@ -176,14 +176,12 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
 //                                save registration status in SharedPreferences
                                 editor.putBoolean("isRegistered", true);
                                 editor.putString("donor_name_details", donorName);
-                                Log.d(">>>>", "onClick: " + sharedPreferences.getString("donor_name_details", "not entered"));
                                 editor.putString("donor_email_details", donorEmail);
                                 editor.putString("donor_contact_details", donorContact);
                                 editor.putString("donor_blood_group_details", bloodGroup);
                                 editor.putString("donor_city_details", donorCity);
                                 editor.putString("donor_frequency_details", isFrequentDonor);
                                 editor.putString("donor_availablity_details", isAvaiable);
-//                                Log.d(">>>>", "onClick: " + sharedPreferences.getString("isRegistered", "not entered"));
                                 editor.commit();
                             }
                         });
@@ -310,7 +308,6 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                 conn.setDoInput(true);
                 conn.setChunkedStreamingMode(0);
 
-                Log.d(">>>>", "doInBackground: " + uri);
 
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
                 writer.write(String.valueOf(url));
@@ -320,7 +317,6 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                 e.printStackTrace();
                 return "Exception";
             } catch (IOException e) {
-                Log.d(">>>>", "doInBackground:2 " + e);
                 e.printStackTrace();
                 return "Exception";
             }

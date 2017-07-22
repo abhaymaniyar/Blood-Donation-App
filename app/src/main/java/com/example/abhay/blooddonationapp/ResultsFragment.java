@@ -12,7 +12,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +34,6 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by abhay on 20/7/17.
@@ -71,8 +68,6 @@ public class ResultsFragment extends Fragment {
         getActivity().setTitle("Search Results");
         String city = b.getString("city");
         String bGroup = b.getString("bGroup");
-        Log.d(">>>>", "onCreate: " + city);
-        Log.d(">>>>", "onCreate: " + bGroup);
         String connectivity = b.getString("isConnected");
         recyclerView = (RecyclerView) getView().findViewById(R.id.donors_recycler_view);
         donorAdapter = new DonorAdapter(donorsList);
@@ -93,9 +88,7 @@ public class ResultsFragment extends Fragment {
     private void prepareDonorsList(String result) {
         try {
             JSONArray jsonObject = new JSONArray(result);
-//            Log.d(">>>>", "prepareDonorsList: "+donorArray.toString());
             for (int i = 0; i < jsonObject.length(); i++) {
-                Log.d(">>>>", "prepareDonorsList: " + jsonObject.getJSONObject(i));
                 JSONObject donorJsonObject = jsonObject.getJSONObject(i);
                 String name = donorJsonObject.getString("name");
                 String contact = donorJsonObject.getString("contact_number");
@@ -103,14 +96,12 @@ public class ResultsFragment extends Fragment {
                 String city = donorJsonObject.getString("city");
                 String isAvailable = donorJsonObject.getString("isavailable");
                 String isFDonor = donorJsonObject.getString("frequentdonor");
-//                Log.d(">>>>", "prepareDonorsList: "+name+" "+city+" "+contact+" "+email);
                 Donor d = new Donor(name, city, contact, email, isFDonor, isAvailable);
                 donorsList.add(d);
             }
             donorAdapter.notifyDataSetChanged();
 //            jsonObject.getJSONObject(0);
         } catch (JSONException e) {
-            Log.d(TAG, "prepareDonorsList: " + e.toString());
             e.printStackTrace();
         }
     }
@@ -144,7 +135,6 @@ public class ResultsFragment extends Fragment {
                 prepareDonorsList(s);
                 searchProgressDialog.hide();
             }
-            Log.d(">>>>", "onPostExecute: " + s);
         }
 
         @Override
@@ -159,14 +149,12 @@ public class ResultsFragment extends Fragment {
             String result = null;
             if (isConnected == true) {
 
-                Log.d(">>>>URL ", "doInBackground: " + strings[1]);
                 try {
 //              Creating a http connection
                     String uri;
                     if (strings[1].length() == 0) {
                         uri = Uri.parse("http://ngoindex.info/search_donor.php").buildUpon().appendQueryParameter("bGroup", "'" + strings[0] + "'")
                                 .build().toString();
-                        Log.d(">>>>URL", "doInBackground: " + uri);
                     } else {
                         uri = Uri.parse("http://ngoindex.info/search_donor.php").buildUpon().appendQueryParameter("bGroup", "'" + strings[0] + "'")
                                 .appendQueryParameter("city", "'" + strings[1] + "'").build().toString();
@@ -177,7 +165,6 @@ public class ResultsFragment extends Fragment {
                     httpURLConnection.setChunkedStreamingMode(0);
                     httpURLConnection.setDoInput(true);
                     httpURLConnection.setDoOutput(true);
-                    Log.d(">>>>URL", "doInBackground: " + url);
 //              Writing link to the output stream of the http connection
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(httpURLConnection.getOutputStream()));
                     writer.write(String.valueOf(uri));
@@ -197,7 +184,6 @@ public class ResultsFragment extends Fragment {
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                         fragmentManager.beginTransaction().replace(R.id.fragment_frame, fragment, "Other Fragment").commit();
                     }
-                    Log.d(">>>>json: ", "doInBackground: " + result.length());
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (ConnectException e) {
