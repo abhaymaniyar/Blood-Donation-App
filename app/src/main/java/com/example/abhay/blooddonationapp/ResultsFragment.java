@@ -130,6 +130,7 @@ public class ResultsFragment extends Fragment {
                     }
                 });
                 AlertDialog alertDialog = builder.create();
+                alertDialog.setCanceledOnTouchOutside(false);
                 alertDialog.show();
             } else {
                 prepareDonorsList(s);

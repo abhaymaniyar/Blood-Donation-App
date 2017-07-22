@@ -272,6 +272,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
+                        registerProgressDialog.setCanceledOnTouchOutside(false);
                         registerProgressDialog.hide();
                         Fragment f = new MainFragment();
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, f, "Main Fragment").commit();

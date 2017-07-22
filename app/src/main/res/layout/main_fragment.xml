@@ -68,6 +68,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="40dp"
+                            android:textAlignment="center"
                             android:gravity="center_horizontal"
                             android:layout_marginRight="40dp"
                             android:layout_marginTop="15dp"
