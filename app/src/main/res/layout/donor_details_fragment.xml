@@ -38,7 +38,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Blood Group"
+                android:text="@string/blood_group"
                 android:textColor="@color/redTextColor"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -47,7 +47,7 @@
                 android:id="@+id/donor_blood_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="B+"
+                android:text="@string/empty_string"
                 android:textSize="15sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -83,7 +83,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name"
+                android:text="@string/name"
                 android:textColor="@color/redTextColor"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -92,7 +92,7 @@
                 android:id="@+id/donor_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Abhay Maniyar"
+                android:text="@string/empty_string"
                 android:textSize="15sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -128,7 +128,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Contact Number"
+                android:text="@string/contact_number"
                 android:textColor="@color/redTextColor"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -137,7 +137,7 @@
                 android:id="@+id/donor_contact_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="8806902834"
+                android:text="@string/empty_string"
                 android:textSize="15sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -173,7 +173,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Email Address"
+                android:text="@string/email_address"
                 android:textColor="@color/redTextColor"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -182,7 +182,7 @@
                 android:id="@+id/donor_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="abhaymaniyar@live.in"
+                android:text="@string/empty_string"
                 android:textSize="15sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -218,7 +218,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="City"
+                android:text="@string/city"
                 android:textColor="@color/redTextColor"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -227,7 +227,7 @@
                 android:id="@+id/donor_city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Indore"
+                android:text="@string/empty_string"
                 android:textSize="15sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -263,7 +263,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Available for emeanrgency situations."
+                android:text="@string/available_for_emergency_situations"
                 android:textColor="@color/redTextColor"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -272,7 +272,7 @@
                 android:id="@+id/is_available"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Yes"
+                android:text="@string/empty_string"
                 android:textSize="15sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -308,7 +308,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Frequent Donor."
+                android:text="@string/frequent_donor"
                 android:textColor="@color/redTextColor"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -317,7 +317,7 @@
                 android:id="@+id/is_frequent_donor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Yes"
+                android:text="@string/empty_string"
                 android:textSize="15sp"
                 android:textStyle="bold" />
         </LinearLayout>

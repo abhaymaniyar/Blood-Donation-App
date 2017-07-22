@@ -5,7 +5,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="No results found"
+        android:text="@string/no_results"
         android:gravity="center"
         android:textColor="#92b71c1c"
         android:textStyle="bold"

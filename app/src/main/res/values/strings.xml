@@ -5,4 +5,24 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="spinner_title">Select Category</string>
     <string name="action_settings">Settings</string>
+    <string name="about_me">About Me</string>
+    <string name="blood_group">Blood Group</string>
+    <string name="empty_string" />
+    <string name="name">Name</string>
+    <string name="abhay_maniyar">Abhay Maniyar</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="email_address">Email Address</string>
+    <string name="city">City</string>
+    <string name="available_for_emergency_situations">Available for emergency situations?</string>
+    <string name="frequent_donor">Are you a frequent Donor?</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="enter_contact">Enter contact no</string>
+    <string name="enter_email">Enter email id</string>
+    <string name="enter_city">Enter your city</string>
+    <string name="register">Register</string>
+    <string name="no_results">No results found</string>
+    <string name="preferred_city">Preferred City</string>
+    <string name="enter_preferred_city">Enter preferred city</string>
+    <string name="search">Search</string>
+    <string name="be_a_donor">Be a proud donor! Save a life.</string>
 </resources>

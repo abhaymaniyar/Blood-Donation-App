@@ -37,7 +37,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Blood Group"
+                    android:text="@string/blood_group"
                     android:textStyle="bold"
                     android:textSize="15sp"
                     android:gravity="center"
@@ -93,7 +93,7 @@
                     android:background="@drawable/custom_edittext"
                     android:ems="10"
                     android:gravity="center"
-                    android:hint="Enter Name"
+                    android:hint="@string/enter_name"
                     android:inputType="textCapWords"
                     android:textColorHint="@color/editTextBg"
                     tools:layout_editor_absoluteX="159dp"
@@ -127,7 +127,7 @@
                     android:background="@drawable/custom_edittext"
                     android:ems="10"
                     android:gravity="center"
-                    android:hint="Enter contact no"
+                    android:hint="@string/enter_contact"
                     android:inputType="phone"
                     android:maxLength="10"
                     android:maxLines="1"
@@ -163,7 +163,7 @@
                     android:background="@drawable/custom_edittext"
                     android:ems="10"
                     android:gravity="center"
-                    android:hint="Enter email id"
+                    android:hint="@string/enter_email"
                     android:inputType="textEmailAddress"
                     android:textColorHint="@color/editTextBg"
                     tools:layout_editor_absoluteX="159dp"
@@ -189,7 +189,7 @@
                     android:background="@drawable/custom_edittext"
                     android:ems="10"
                     android:gravity="center"
-                    android:hint="Enter your city"
+                    android:hint="@string/enter_city"
                     android:inputType="textCapWords"
                     android:textColorHint="@color/editTextBg"
                     tools:layout_editor_absoluteX="159dp"
@@ -213,7 +213,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="15sp"
-                    android:text="Available for emergency situations?"
+                    android:text="@string/available_for_emergency_situations"
                     tools:layout_editor_absoluteX="39dp"
                     tools:layout_editor_absoluteY="80dp" />
 
@@ -240,7 +240,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="15sp"
-                    android:text="Are you a frequent donor?"
+                    android:text="@string/frequent_donor"
                     tools:layout_editor_absoluteX="39dp"
                     tools:layout_editor_absoluteY="80dp" />
 
@@ -274,7 +274,7 @@
                     android:paddingBottom="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="10dp"
-                    android:text="Register"
+                    android:text="@string/register"
                     android:textColor="#fff" />
             </LinearLayout>
         </LinearLayout>

@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Blood Donation App"
+        android:text="@string/app_name"
         android:textStyle="bold"
         android:textSize="20sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
@@ -32,6 +32,6 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Be a proud donor! Save a life." />
+        android:text="@string/be_a_donor" />
 
 </LinearLayout>
