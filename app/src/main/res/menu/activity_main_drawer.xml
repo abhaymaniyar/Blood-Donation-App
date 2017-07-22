@@ -5,27 +5,27 @@
         <item
             android:id="@+id/nav_search"
             android:icon="@drawable/ic_search_black_24dp"
-            android:title="Search Donors" />
+            android:title="@string/search_donors" />
         <item
             android:id="@+id/nav_register"
             android:icon="@drawable/ic_assignment_black_24dp"
-            android:title="Register" />
+            android:title="@string/register" />
         <item
             android:id="@+id/nav_faq"
             android:icon="@drawable/ic_help_black_24dp"
-            android:title="FAQs"/>
+            android:title="@string/faqs"/>
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/communicate">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="@string/share" />
             <item
                 android:id="@+id/about_us"
                 android:icon="@drawable/about_us_vector"
-                android:title="About Me" />
+                android:title="@string/about_me" />
         </menu>
     </item>
 

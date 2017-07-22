@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Blood Donation app</string>
+
+    <string name="navigation_drawer_open">नेविगेशन ड्रॉवर खोलें</string>
+    <string name="navigation_drawer_close">नेविगेशन ड्रॉवर को बंद करें</string>
+    <string name="spinner_title">श्रेणी का चयन करें</string>
+    <string name="action_settings">सेटिंग्स</string>
+    <string name="about_me">मेरे बारे में</string>
+    <string name="blood_group">रक्त समूह</string>
+    <string name="empty_string" />
+    <string name="name">नाम</string>
+    <string name="abhay_maniyar">अभय मणियार</string>
+    <string name="contact_number">फ़ोन नंबर</string>
+    <string name="email_address">ईमेल</string>
+    <string name="city">शहर</string>
+    <string name="available_for_emergency_situations">आपातकालीन स्थितियों के लिए उपलब्ध है?</string>
+    <string name="frequent_donor">क्या आप अक्सर रक्तदान करते हैं?</string>
+    <string name="enter_name">अपना नाम दर्ज करें</string>
+    <string name="enter_contact">फ़ोन नंबर दर्ज करें</string>
+    <string name="enter_email">ईमेल आईडी दर्ज करें</string>
+    <string name="enter_city">अपना शहर दर्ज करें</string>
+    <string name="register">रजिस्टर</string>
+    <string name="no_results">कोई परिणाम नहीं मिला</string>
+    <string name="preferred_city">पसंदीदा शहर</string>
+    <string name="enter_preferred_city">पसंदीदा शहर दर्ज करें</string>
+    <string name="search">खोज करें</string>
+    <string name="search_donors">रक्त दाता खोज करें</string>
+    <string name="be_a_donor">Be a proud donor! Save a life.</string>
+    <string name="faqs">प्रश्न एवं उत्तर</string>
+    <string name="communicate">संपर्क करें</string>
+    <string name="share">साजा करे</string>
+</resources>
