@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:text="About Us"
+                    android:text="About Me"
                     android:textColor="@color/redTextColor"
                     android:textSize="30sp"
                     android:textStyle="bold" />

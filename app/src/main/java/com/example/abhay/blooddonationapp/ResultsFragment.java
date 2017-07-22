@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -191,7 +192,12 @@ public class ResultsFragment extends Fragment {
                     }
                     reader.close();
                     result = strBuilder.toString();
-                    Log.d(">>>>json: ", "doInBackground: " + result);
+                    if(result.equals("[]")){
+                        Fragment fragment = new EmptyFragment();
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.fragment_frame, fragment, "Other Fragment").commit();
+                    }
+                    Log.d(">>>>json: ", "doInBackground: " + result.length());
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (ConnectException e) {
