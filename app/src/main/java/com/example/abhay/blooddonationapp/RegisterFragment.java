@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Patterns;
@@ -274,6 +275,8 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                         registerProgressDialog.hide();
                         Fragment f = new MainFragment();
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, f, "Main Fragment").commit();
+                        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+                        navigationView.setCheckedItem(R.id.nav_search);
                     }
                 });
                 AlertDialog alertDialog = builder.create();
