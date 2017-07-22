@@ -159,7 +159,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                 if (!(donorName.equals("") || donorEmail.equals("") || donorContact.equals("") || donorCity.equals(""))) {
                     if (!isEmailValid) {
                         validateInput((EditText) emailTextView, "Email Address");
-                    } else if (!isContactValid) {
+                    } else if (!isContactValid || donorContact.length() != 10) {
                         validateInput((EditText) contactTextView, "Contact Number");
                     } else if (contactNumberLength < 10) {
                         validateInput((EditText) contactTextView, "Contact Number");

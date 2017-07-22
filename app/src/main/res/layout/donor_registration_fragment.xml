@@ -129,6 +129,8 @@
                     android:gravity="center"
                     android:hint="Enter contact no"
                     android:inputType="phone"
+                    android:maxLength="10"
+                    android:maxLines="1"
                     android:textColorHint="@color/editTextBg"
                     tools:layout_editor_absoluteX="159dp"
                     tools:layout_editor_absoluteY="63dp" />

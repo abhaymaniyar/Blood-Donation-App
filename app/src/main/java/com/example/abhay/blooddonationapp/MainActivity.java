@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity
             }
         }else{
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, new MainFragment(), "Main Fragment").commit();
+            setTitle("Search Donors");
             navigationView.getMenu().getItem(0).setChecked(true);
         }
     }

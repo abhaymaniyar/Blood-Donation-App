@@ -42,6 +42,7 @@ import static android.content.ContentValues.TAG;
  */
 
 public class ResultsFragment extends Fragment {
+    boolean isConnected = false;
     private DonorAdapter donorAdapter;
     private List<Donor> donorsList = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -66,6 +67,7 @@ public class ResultsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Bundle b = this.getArguments();
+        getActivity().setTitle("Search Results");
         String city = b.getString("city");
         String bGroup = b.getString("bGroup");
         Log.d(">>>>", "onCreate: " + city);
@@ -87,7 +89,31 @@ public class ResultsFragment extends Fragment {
         new SearchAsyncTask().execute(bGroup, city);
     }
 
-    boolean isConnected = false;
+    private void prepareDonorsList(String result) {
+        try {
+            JSONArray jsonObject = new JSONArray(result);
+//            Log.d(">>>>", "prepareDonorsList: "+donorArray.toString());
+            for (int i = 0; i < jsonObject.length(); i++) {
+                Log.d(">>>>", "prepareDonorsList: " + jsonObject.getJSONObject(i));
+                JSONObject donorJsonObject = jsonObject.getJSONObject(i);
+                String name = donorJsonObject.getString("name");
+                String contact = donorJsonObject.getString("contact_number");
+                String email = donorJsonObject.getString("email");
+                String city = donorJsonObject.getString("city");
+                String isAvailable = donorJsonObject.getString("isavailable");
+                String isFDonor = donorJsonObject.getString("frequentdonor");
+//                Log.d(">>>>", "prepareDonorsList: "+name+" "+city+" "+contact+" "+email);
+                Donor d = new Donor(name, city, contact, email, isFDonor, isAvailable);
+                donorsList.add(d);
+            }
+            donorAdapter.notifyDataSetChanged();
+//            jsonObject.getJSONObject(0);
+        } catch (JSONException e) {
+            Log.d(TAG, "prepareDonorsList: " + e.toString());
+            e.printStackTrace();
+        }
+    }
+
     private class SearchAsyncTask extends AsyncTask<String, String, String> {
         @Override
         protected void onPreExecute() {
@@ -98,7 +124,7 @@ public class ResultsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            if (s == null){
+            if (s == null) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("");
                 builder.setMessage("No Internet Connectivity.");
@@ -113,7 +139,7 @@ public class ResultsFragment extends Fragment {
                 });
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
-            }else{
+            } else {
                 prepareDonorsList(s);
                 searchProgressDialog.hide();
             }
@@ -130,13 +156,20 @@ public class ResultsFragment extends Fragment {
             }
             URL url = null;
             String result = null;
-            if (isConnected == true){
+            if (isConnected == true) {
 
                 Log.d(">>>>URL ", "doInBackground: " + strings[1]);
                 try {
 //              Creating a http connection
-                    String uri = Uri.parse("http://ngoindex.info/search_donor.php").buildUpon().appendQueryParameter("bGroup", "'" + strings[0] + "'")
-                            .appendQueryParameter("city", "'" + strings[1] + "'").build().toString();
+                    String uri;
+                    if (strings[1].length() == 0) {
+                        uri = Uri.parse("http://ngoindex.info/search_donor.php").buildUpon().appendQueryParameter("bGroup", "'" + strings[0] + "'")
+                                .build().toString();
+                        Log.d(">>>>URL", "doInBackground: " + uri);
+                    } else {
+                        uri = Uri.parse("http://ngoindex.info/search_donor.php").buildUpon().appendQueryParameter("bGroup", "'" + strings[0] + "'")
+                                .appendQueryParameter("city", "'" + strings[1] + "'").build().toString();
+                    }
                     url = new URL(uri);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("GET");
@@ -166,7 +199,7 @@ public class ResultsFragment extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }else {
+            } else {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("");
                 builder.setMessage("No Internet Connectivity.");
@@ -182,31 +215,6 @@ public class ResultsFragment extends Fragment {
                 alertDialog.show();
             }
             return result;
-        }
-    }
-
-    private void prepareDonorsList(String result) {
-        try {
-            JSONArray jsonObject = new JSONArray(result);
-//            Log.d(">>>>", "prepareDonorsList: "+donorArray.toString());
-            for (int i = 0; i < jsonObject.length(); i++) {
-                Log.d(">>>>", "prepareDonorsList: " + jsonObject.getJSONObject(i));
-                JSONObject donorJsonObject = jsonObject.getJSONObject(i);
-                String name = donorJsonObject.getString("name");
-                String contact = donorJsonObject.getString("contact_number");
-                String email = donorJsonObject.getString("email");
-                String city = donorJsonObject.getString("city");
-                String isAvailable = donorJsonObject.getString("isavailable");
-                String isFDonor = donorJsonObject.getString("frequentdonor");
-//                Log.d(">>>>", "prepareDonorsList: "+name+" "+city+" "+contact+" "+email);
-                Donor d = new Donor(name, city, contact, email, isFDonor, isAvailable);
-                donorsList.add(d);
-            }
-            donorAdapter.notifyDataSetChanged();
-//            jsonObject.getJSONObject(0);
-        } catch (JSONException e) {
-            Log.d(TAG, "prepareDonorsList: "+e.toString());
-            e.printStackTrace();
         }
     }
 }
