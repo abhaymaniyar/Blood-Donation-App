@@ -140,6 +140,7 @@ public class ResultsFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... strings) {
+            Fragment fragment;
             try {
                 InetAddress inetAddress = InetAddress.getByName("google.com");
                 isConnected = !inetAddress.equals("");
@@ -181,7 +182,7 @@ public class ResultsFragment extends Fragment {
                     reader.close();
                     result = strBuilder.toString();
                     if(result.equals("[]")){
-                        Fragment fragment = new EmptyFragment();
+                        fragment = new EmptyFragment();
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                         fragmentManager.beginTransaction().replace(R.id.fragment_frame, fragment, "Other Fragment").commit();
                     }
@@ -189,6 +190,8 @@ public class ResultsFragment extends Fragment {
                     e.printStackTrace();
                 } catch (ConnectException e) {
                     Toast.makeText(getContext(), "Connection timed out", Toast.LENGTH_LONG).show();
+                    fragment = new MainFragment();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, fragment, "Main Fragment").commit();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
