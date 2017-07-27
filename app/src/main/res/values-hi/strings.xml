@@ -5,12 +5,10 @@
     <string name="navigation_drawer_open">नेविगेशन ड्रॉवर खोलें</string>
     <string name="navigation_drawer_close">नेविगेशन ड्रॉवर को बंद करें</string>
     <string name="spinner_title">श्रेणी का चयन करें</string>
-    <string name="action_settings">सेटिंग्स</string>
     <string name="about_me">मेरे बारे में</string>
     <string name="blood_group">रक्त समूह</string>
     <string name="empty_string" />
     <string name="name">नाम</string>
-    <string name="abhay_maniyar">अभय मणियार</string>
     <string name="contact_number">फ़ोन नंबर</string>
     <string name="email_address">ईमेल</string>
     <string name="city">शहर</string>

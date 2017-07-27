@@ -75,53 +75,25 @@ public class DonorAdapter extends RecyclerView.Adapter<DonorAdapter.DonorViewHol
 
                     vcfFile = new File(view.getContext().getExternalFilesDir(null), donor.getName()+".vcf");
 
+//                    create vcf card from donors details
                     FileWriter fw = null;
                     fw = new FileWriter(vcfFile);
                     fw.write("BEGIN:VCARD\r\n");
                     fw.write("VERSION:3.0\r\n");
-                    // fw.write("N:" + p.getSurname() + ";" + p.getFirstName() + "\r\n");
                     fw.write("FN:" + donor.getName() + "\r\n");
-                    //  fw.write("ORG:" + p.getCompanyName() + "\r\n");
-                    //  fw.write("TITLE:" + p.getTitle() + "\r\n");
                     fw.write("TEL;TYPE=WORK,VOICE:" + donor.getContact() + "\r\n");
-                    //   fw.write("TEL;TYPE=HOME,VOICE:" + p.getHomePhone() + "\r\n");
-                    //   fw.write("ADR;TYPE=WORK:;;" + p.getStreet() + ";" + p.getCity() + ";" + p.getState() + ";" + p.getPostcode() + ";" + p.getCountry() + "\r\n");
                     fw.write("EMAIL;TYPE=PREF,INTERNET:" + donor.getEmail() + "\r\n");
                     fw.write("END:VCARD\r\n");
                     fw.close();
 
-                   /* Intent i = new Intent(); //this will import vcf in contact list
-                    i.setAction(android.content.Intent.ACTION_VIEW);
-                    i.setDataAndType(Uri.fromFile(vcfFile), "text/x-vcard");
-                    startActivity(i);*/
-
-//                    Toast.makeText(MainActivity.this, "Created!", Toast.LENGTH_SHORT).show();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-//                File vcfFile = new File(view.getContext().getExternalFilesDir(null), "generated.vcf");
-//                try {
-//                    FileWriter fo = new FileWriter(vcfFile);
-//                    String str = "BEGIN:VCARD\r\n" +
-//                            "VERSION:3.0\r\n" +
-//                            "FN:" + donor.getName() + "\r\n" +
-//                            "TITLE:Donor\r\n" +
-//                            "WORK:" + donor.getContact() + "\r\n" +
-//                            "EMAIL;TYPE=PREF,INTERNET:" + donor.getEmail() + "\r\n" +
-//                            "END:VCARD\r\n";
-//                    Log.d(">>>>", "onClick: " + str);
-//                    fo.close();
-//                } catch (FileNotFoundException e) {
-//                    e.printStackTrace();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
                 Intent i = new Intent();
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.setAction(Intent.ACTION_SEND);
                 i.setDataAndType(Uri.fromFile(vcfFile), "text/x-vcard");
                 i.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+vcfFile));
-//                i.setPackage("com.whatsapp");
                 view.getContext().startActivity(i);
             }
         });
@@ -151,20 +123,6 @@ public class DonorAdapter extends RecyclerView.Adapter<DonorAdapter.DonorViewHol
 
         public String getContact() {
             return contactOfDonor.getText().toString();
-        }
-    }
-
-    public class CustomOnClickListener implements View.OnClickListener {
-        private String data;
-
-        public CustomOnClickListener(String data) {
-            this.data = data;
-        }
-
-        @Override
-        public void onClick(View view) {
-            i.setData(Uri.parse(data));
-            view.getContext().startActivity(i);
         }
     }
 }

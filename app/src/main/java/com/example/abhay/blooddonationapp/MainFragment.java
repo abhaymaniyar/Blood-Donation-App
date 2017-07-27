@@ -88,15 +88,6 @@ public class MainFragment extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 bundle.putString("city", city);
                 bundle.putString("bGroup", bGroup);
-//                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-//                StrictMode.setThreadPolicy(policy);
-//                new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        check[0] = String.valueOf(checkInternetConnectivity());
-//                    }
-//                }).start();
-//                bundle.putString("isConnected", check[0]);
                 fragment.setArguments(bundle);
                 fragmentManager.beginTransaction().replace(R.id.fragment_frame, fragment, "Other Fragment").commit();
             }

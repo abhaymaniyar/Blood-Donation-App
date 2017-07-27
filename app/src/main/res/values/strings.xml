@@ -4,12 +4,10 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="spinner_title">Select Category</string>
-    <string name="action_settings">Settings</string>
     <string name="about_me">About Me</string>
     <string name="blood_group">Blood Group</string>
     <string name="empty_string" />
     <string name="name">Name</string>
-    <string name="abhay_maniyar">Abhay Maniyar</string>
     <string name="contact_number">Contact Number</string>
     <string name="email_address">Email Address</string>
     <string name="city">City</string>
