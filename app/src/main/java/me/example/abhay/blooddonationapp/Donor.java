@@ -1,4 +1,4 @@
-package com.example.abhay.blooddonationapp;
+package me.example.abhay.blooddonationapp;
 
 /**
  * Created by abhay on 13/7/17.

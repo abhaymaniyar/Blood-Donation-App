@@ -1,4 +1,4 @@
-package com.example.abhay.blooddonationapp;
+package me.example.abhay.blooddonationapp;
 
 import org.junit.Test;
 

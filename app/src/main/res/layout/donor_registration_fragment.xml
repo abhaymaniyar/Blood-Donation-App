@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:context="com.example.abhay.blooddonationapp.MainActivity"
+            tools:context="com.example.abhay.blooddonationapp.me.example.abhay.blooddonationapp.MainActivity"
             tools:showIn="@layout/app_bar_main">
 
             <LinearLayout

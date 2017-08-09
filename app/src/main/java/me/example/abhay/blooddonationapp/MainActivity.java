@@ -1,4 +1,4 @@
-package com.example.abhay.blooddonationapp;
+package me.example.abhay.blooddonationapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
