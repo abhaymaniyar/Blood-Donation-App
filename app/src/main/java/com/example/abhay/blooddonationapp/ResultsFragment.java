@@ -164,6 +164,7 @@ public class ResultsFragment extends Fragment {
                     url = new URL(uri);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("GET");
+                    httpURLConnection.setConnectTimeout(10000);
                     httpURLConnection.setChunkedStreamingMode(0);
                     httpURLConnection.setDoInput(true);
                     httpURLConnection.setDoOutput(true);
