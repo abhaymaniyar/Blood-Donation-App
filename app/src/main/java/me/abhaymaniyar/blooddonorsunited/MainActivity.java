@@ -97,8 +97,8 @@ public class MainActivity extends AppCompatActivity
             i.setAction(Intent.ACTION_SEND);
 //            i.putExtra(Intent.EXTRA_SUBJECT, Uri.parse("https://play.google.com/store/apps/details?id=me.example.abhay.blooddonationapp"));
             i.putExtra(Intent.EXTRA_SUBJECT, "My application name");
-            String sAux = "\n\"Blood Donors United\": \n";
-            sAux = sAux + "Search for blood donors in your city or register as a donor to save a life.\n\n";
+            String sAux = "\n*Blood Donors United*:  \n";
+            sAux = sAux + "Search for blood donors in your city or register as a donor to save a life with Blood Donors United.\n\n";
             sAux = sAux + "https://play.google.com/store/apps/details?id=me.abhay.blooddonationapp \n";
             i.putExtra(Intent.EXTRA_TEXT, sAux);
             this.startActivity(i);
