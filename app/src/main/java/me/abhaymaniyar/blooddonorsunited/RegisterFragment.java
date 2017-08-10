@@ -20,9 +20,11 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.io.BufferedWriter;
@@ -104,14 +106,16 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
         });
 
         final Spinner frequentDonor = (Spinner) getView().findViewById(R.id.frequent_donor_spinner);
-        final Spinner emergencyDonor = (Spinner) getView().findViewById(R.id.emergency_spinner);
+        final String[] isAvaiable = {null};
+//        final Spinner emergencyDonor = (Spinner) getView().findViewById(R.id.emergency_spinner);
+        Switch emergencyDonorSwitch = (Switch) getView().findViewById(R.id.emergency_switch);
         ArrayList<String> yesNoSpinnerItems = new ArrayList<>();
         yesNoSpinnerItems.add("Yes");
         yesNoSpinnerItems.add("No");
         ArrayAdapter<String> yesNoAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, yesNoSpinnerItems);
         yesNoAdapter.setDropDownViewResource(R.layout.spinner_item);
         frequentDonor.setAdapter(yesNoAdapter);
-        emergencyDonor.setAdapter(yesNoAdapter);
+//        emergencyDonor.setAdapter(yesNoAdapter);
         frequentDonor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -124,18 +128,28 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
             }
         });
 
-        emergencyDonor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String item = adapterView.getItemAtPosition(i).toString();
-                emergencyDonor.setPrompt(item);
-            }
+//        emergencyDonor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                String item = adapterView.getItemAtPosition(i).toString();
+//                emergencyDonor.setPrompt(item);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//            }
+//        });
 
+        emergencyDonorSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    isAvaiable[0] = "Yes";
+                }else{
+                    isAvaiable[0] = "No";
+                }
             }
         });
-
         LinearLayout registerButton = (LinearLayout) getView().findViewById(R.id.register_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,7 +169,6 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                 int contactNumberLength = donorContact.length();
                 Log.d(">>>>", "onClick: "+contactNumberLength);
                 final String isFrequentDonor = frequentDonor.getPrompt().toString();
-                final String isAvaiable = emergencyDonor.getPrompt().toString();
 
 //               Check for User details validation and integrity
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -172,7 +185,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                             public void onClick(DialogInterface dialogInterface, int i) {
 
 //                                execute background registration thread
-                                new AsyncRegister().execute(bloodGroup, donorName, donorContact, donorEmail, donorCity, isAvaiable, isFrequentDonor);
+                                new AsyncRegister().execute(bloodGroup, donorName, donorContact, donorEmail, donorCity, isAvaiable[0], isFrequentDonor);
 
 //                                save registration status in SharedPreferences
                                 editor.putBoolean("isRegistered", true);
@@ -182,7 +195,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                                 editor.putString("donor_blood_group_details", bloodGroup);
                                 editor.putString("donor_city_details", donorCity);
                                 editor.putString("donor_frequency_details", isFrequentDonor);
-                                editor.putString("donor_availablity_details", isAvaiable);
+                                editor.putString("donor_availablity_details", isAvaiable[0]);
                                 editor.commit();
                             }
                         });
