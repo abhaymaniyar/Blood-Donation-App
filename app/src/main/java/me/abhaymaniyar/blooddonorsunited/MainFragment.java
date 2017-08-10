@@ -1,6 +1,8 @@
 package me.abhaymaniyar.blooddonorsunited;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -76,21 +78,35 @@ public class MainFragment extends Fragment {
 
 //        onClick behavior of the search button
 //        Button searchDonorBtn = (Button) getView().findViewById(R.id.search_button);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LinearLayout linearLayout = (LinearLayout) getView().findViewById(R.id.button);
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Bundle bundle = new Bundle();
-                EditText cityEditText = (EditText) getView().findViewById(R.id.search_city);
-                String city = cityEditText.getText().toString();
-                Spinner spnr = (Spinner) getView().findViewById(R.id.search_spinner);
-                String bGroup = spnr.getPrompt().toString();
-                Fragment fragment = new ResultsFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                bundle.putString("city", city);
-                bundle.putString("bGroup", bGroup);
-                fragment.setArguments(bundle);
-                fragmentManager.beginTransaction().replace(R.id.fragment_frame, fragment, "Other Fragment").commit();
+                if(spinner.getPrompt().equals("Select")){
+                    builder.setTitle("");
+                    builder.setMessage("Please select a blood group.");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }else{
+                    final Bundle bundle = new Bundle();
+                    EditText cityEditText = (EditText) getView().findViewById(R.id.search_city);
+                    String city = cityEditText.getText().toString();
+                    Spinner spnr = (Spinner) getView().findViewById(R.id.search_spinner);
+                    String bGroup = spnr.getPrompt().toString();
+                    Fragment fragment = new ResultsFragment();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    bundle.putString("city", city);
+                    bundle.putString("bGroup", bGroup);
+                    fragment.setArguments(bundle);
+                    fragmentManager.beginTransaction().replace(R.id.fragment_frame, fragment, "Other Fragment").commit();
+                }
             }
         });
     }
