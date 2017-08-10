@@ -1,6 +1,7 @@
 package me.example.abhay.blooddonationapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -19,9 +20,10 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
+    NavigationView navigationView;
+    int i = 0;
     private Fragment fragmentOther;
     private FragmentTransaction fragmentTransaction;
-    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +47,6 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
     }
-
-    int i = 0;
 
     @Override
     public void onBackPressed() {
@@ -91,7 +91,19 @@ public class MainActivity extends AppCompatActivity
             fragmentOther = new FaqFragment();
             setTitle("Blood Donation FAQ");
         } else if (id == R.id.nav_share) {
-
+            Intent i = new Intent();
+            i.setType("text/plain");
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.setAction(Intent.ACTION_SEND);
+//            i.putExtra(Intent.EXTRA_SUBJECT, Uri.parse("https://play.google.com/store/apps/details?id=me.example.abhay.blooddonationapp"));
+            i.putExtra(Intent.EXTRA_SUBJECT, "My application name");
+            String sAux = "\n\"Blood Donors United\": \n";
+            sAux = sAux + "Search for blood donors in your city or register as a donor to save a life.\n\n";
+            sAux = sAux + "https://play.google.com/store/apps/details?id=me.example.abhay.blooddonationapp \n";
+            i.putExtra(Intent.EXTRA_TEXT, sAux);
+            this.startActivity(i);
+            fragmentOther = new MainFragment();
+            setTitle("Search Donors");
         } else if (id == R.id.about_us) {
             fragmentOther = new AboutUsFragment();
             setTitle("About Me");

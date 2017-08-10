@@ -6,7 +6,7 @@
     android:background="#beb71c1c"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.abhay.blooddonationapp.me.example.abhay.blooddonationapp.MainActivity">
+    tools:context="me.example.abhay.blooddonationapp.MainActivity">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -52,11 +52,12 @@
                         android:textSize="15sp" />
                 </ScrollView>
             </LinearLayout>
+
             <LinearLayout
+                android:id="@+id/github_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:id="@+id/github_icon"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -64,12 +65,36 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:src="@drawable/ic_github_logo" />
+
                 <ImageView
+                    android:id="@+id/email_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:id="@+id/email_icon"
-                    android:src="@drawable/ic_email_black_24dp"/>
+                    android:src="@drawable/ic_email_black_24dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="With "
+                    android:fontFamily="serif-monospace"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/if_love_37578"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" from India"
+                    android:fontFamily="serif-monospace"
+                    />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

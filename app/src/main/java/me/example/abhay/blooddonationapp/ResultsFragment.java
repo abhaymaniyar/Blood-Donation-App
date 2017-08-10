@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.abhay.blooddonationapp.R;
+//import com.example.abhay.blooddonationapp.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
