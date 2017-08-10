@@ -13,10 +13,10 @@
     <string name="city">City</string>
     <string name="available_for_emergency_situations">Available for emergency situations?</string>
     <string name="frequent_donor">Are you a frequent Donor?</string>
-    <string name="enter_name">Enter your Name</string>
+    <string name="enter_name">Enter your Name*</string>
     <string name="enter_contact">Enter your contact no</string>
-    <string name="enter_email">Enter your email id</string>
-    <string name="enter_city">Enter your city</string>
+    <string name="enter_email">Enter your email id*</string>
+    <string name="enter_city">Enter your city*</string>
     <string name="register">Register</string>
     <string name="no_results">No results found</string>
     <string name="preferred_city">Preferred City</string>

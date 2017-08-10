@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -150,19 +151,18 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                 EditText cityView = (EditText) getView().findViewById(R.id.donorCity);
                 final String donorCity = cityView.getText().toString();
                 boolean isEmailValid = Patterns.EMAIL_ADDRESS.matcher(donorEmail).matches();
-                boolean isContactValid = Patterns.PHONE.matcher(donorContact).matches();
+//                boolean isContactValid = Patterns.PHONE.matcher(donorContact).matches();
                 int contactNumberLength = donorContact.length();
+                Log.d(">>>>", "onClick: "+contactNumberLength);
                 final String isFrequentDonor = frequentDonor.getPrompt().toString();
                 final String isAvaiable = emergencyDonor.getPrompt().toString();
 
 //               Check for User details validation and integrity
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                if (!(donorName.equals("") || donorEmail.equals("") || donorContact.equals("") || donorCity.equals(""))) {
+                if (!(donorName.equals("") || donorEmail.equals("") || donorCity.equals(""))) {
                     if (!isEmailValid) {
                         validateInput((EditText) emailTextView, "Email Address");
-                    } else if (!isContactValid || donorContact.length() != 10) {
-                        validateInput((EditText) contactTextView, "Contact Number");
-                    } else if (contactNumberLength < 10) {
+                    } else if (contactNumberLength > 0 && contactNumberLength < 10) {
                         validateInput((EditText) contactTextView, "Contact Number");
                     } else {
                         builder.setTitle("");
