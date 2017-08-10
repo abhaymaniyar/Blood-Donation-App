@@ -46,6 +46,7 @@ public class MainFragment extends Fragment {
 
         final Spinner spinner = (Spinner) getView().findViewById(R.id.search_spinner);
         final List<String> bloodGroups = new ArrayList<String>();
+        bloodGroups.add("Select");
         bloodGroups.add("O+");
         bloodGroups.add("O-");
         bloodGroups.add("A+");

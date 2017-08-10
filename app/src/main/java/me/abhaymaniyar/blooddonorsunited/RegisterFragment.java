@@ -47,6 +47,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
     TextView contactTextView;
     TextView emailTextView;
     Spinner bloodGroupSpinner;
+    Spinner frequentDonor;
     ProgressDialog registerProgressDialog;
     Fragment donorDetialsFragment = new DonorDetailsFragment();
     FragmentManager fragmentManager;
@@ -77,6 +78,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
 
         spinner.setPrompt("Select Blood Group");
         List<String> bloodGroups = new ArrayList<String>();
+        bloodGroups.add("Select");
         bloodGroups.add("O+");
         bloodGroups.add("O-");
         bloodGroups.add("A+");
@@ -105,11 +107,12 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
             }
         });
 
-        final Spinner frequentDonor = (Spinner) getView().findViewById(R.id.frequent_donor_spinner);
+        frequentDonor = (Spinner) getView().findViewById(R.id.frequent_donor_spinner);
         final String[] isAvaiable = {null};
 //        final Spinner emergencyDonor = (Spinner) getView().findViewById(R.id.emergency_spinner);
         Switch emergencyDonorSwitch = (Switch) getView().findViewById(R.id.emergency_switch);
         ArrayList<String> yesNoSpinnerItems = new ArrayList<>();
+        yesNoSpinnerItems.add("Select");
         yesNoSpinnerItems.add("Yes");
         yesNoSpinnerItems.add("No");
         ArrayAdapter<String> yesNoAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, yesNoSpinnerItems);
@@ -139,7 +142,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
 //            public void onNothingSelected(AdapterView<?> adapterView) {
 //            }
 //        });
-
+        isAvaiable[0] = "No";
         emergencyDonorSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -172,7 +175,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
 
 //               Check for User details validation and integrity
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                if (!(donorName.equals("") || donorEmail.equals("") || donorCity.equals(""))) {
+                if (!(donorName.equals("") || donorEmail.equals("") || donorCity.equals("")) && !bloodGroup.equals("Select") && !isFrequentDonor.equals("Select")) {
                     if (!isEmailValid) {
                         validateInput((EditText) emailTextView, "Email Address");
                     } else if (contactNumberLength > 0 && contactNumberLength < 10) {
@@ -210,14 +213,34 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                         alertDialog.show();
                     }
                 } else {
-                    builder.setTitle("");
-                    builder.setMessage("Please fill all the details.");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss();
-                        }
-                    });
+                    if(bloodGroup.equals("Select")){
+                        builder.setTitle("");
+                        builder.setMessage("Please select a blood group.");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+                    }else if(donorName.equals("") || donorEmail.equals("") || donorCity.equals("")){
+                        builder.setTitle("");
+                        builder.setMessage("Please fill all the details.");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+                    }else if(isFrequentDonor.equals("Select")){
+                        builder.setTitle("");
+                        builder.setMessage("Please select a frequency option.");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+                    }
                     AlertDialog alertDialog = builder.create();
                     alertDialog.show();
                 }
