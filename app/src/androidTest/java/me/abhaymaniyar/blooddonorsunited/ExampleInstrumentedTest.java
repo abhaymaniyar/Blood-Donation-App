@@ -1,4 +1,4 @@
-package me.example.abhay.blooddonationapp;
+package me.abhaymaniyar.blooddonorsunited;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

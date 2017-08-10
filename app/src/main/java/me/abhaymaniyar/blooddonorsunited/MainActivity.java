@@ -1,4 +1,4 @@
-package me.example.abhay.blooddonationapp;
+package me.abhaymaniyar.blooddonorsunited;
 
 import android.content.Context;
 import android.content.Intent;
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity
             i.putExtra(Intent.EXTRA_SUBJECT, "My application name");
             String sAux = "\n\"Blood Donors United\": \n";
             sAux = sAux + "Search for blood donors in your city or register as a donor to save a life.\n\n";
-            sAux = sAux + "https://play.google.com/store/apps/details?id=me.example.abhay.blooddonationapp \n";
+            sAux = sAux + "https://play.google.com/store/apps/details?id=me.abhay.blooddonationapp \n";
             i.putExtra(Intent.EXTRA_TEXT, sAux);
             this.startActivity(i);
             fragmentOther = new MainFragment();
