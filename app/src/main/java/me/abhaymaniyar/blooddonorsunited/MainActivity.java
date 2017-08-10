@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity
             this.startActivity(i);
             fragmentOther = new MainFragment();
             setTitle("Search Donors");
+            navigationView.getMenu().getItem(0).setChecked(true);
         } else if (id == R.id.about_us) {
             fragmentOther = new AboutUsFragment();
             setTitle("About Me");
