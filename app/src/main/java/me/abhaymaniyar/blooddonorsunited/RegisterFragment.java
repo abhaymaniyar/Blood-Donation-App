@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -131,6 +132,8 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
             }
         });
 
+        final AutoCompleteTextView autocompleteView = (AutoCompleteTextView) getView().findViewById(R.id.donorCity);
+        autocompleteView.setAdapter(new PlacesAutoCompleteAdapter(getActivity(), R.layout.autocomplete_list_item));
 //        emergencyDonor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 //            @Override
 //            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -142,6 +145,18 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
 //            public void onNothingSelected(AdapterView<?> adapterView) {
 //            }
 //        });
+        autocompleteView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Get data associated with the specified position
+                // in the list (AdapterView)
+                String description = (String) parent.getItemAtPosition(position);
+                String[] strArray = description.split(",");
+                autocompleteView.setText(strArray[0]);
+//                Toast.makeText(getActivity(), description, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         isAvaiable[0] = "No";
         emergencyDonorSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

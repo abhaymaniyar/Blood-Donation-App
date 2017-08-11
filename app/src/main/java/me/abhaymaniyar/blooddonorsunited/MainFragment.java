@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -73,6 +74,21 @@ public class MainFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        final AutoCompleteTextView autocompleteView = (AutoCompleteTextView) getView().findViewById(R.id.search_city);
+        autocompleteView.setAdapter(new PlacesAutoCompleteAdapter(getActivity(), R.layout.autocomplete_list_item));
+
+        autocompleteView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Get data associated with the specified position
+                // in the list (AdapterView)
+                String description = (String) parent.getItemAtPosition(position);
+                String[] strArray = description.split(",");
+                autocompleteView.setText(strArray[0]);
+//                Toast.makeText(getActivity(), description, Toast.LENGTH_SHORT).show();
             }
         });
 

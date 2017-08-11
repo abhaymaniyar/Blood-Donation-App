@@ -181,7 +181,7 @@
                 android:layout_weight="1">
 
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/donorCity"
                     android:layout_width="0dp"
                     android:layout_height="43dp"
