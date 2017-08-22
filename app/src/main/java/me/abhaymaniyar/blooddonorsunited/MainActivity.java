@@ -29,6 +29,28 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Thread t=new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                SharedPreferences  sharedPreferencs = getSharedPreferences(ConfigClass.FLAG, Context.MODE_PRIVATE);
+
+                if(sharedPreferencs.getBoolean(ConfigClass.FLAG,true)){
+
+
+                    startActivity(new Intent(MainActivity.this,IntroActivity.class));
+
+                    SharedPreferences.Editor e=sharedPreferencs.edit();
+
+                    e.putBoolean(ConfigClass.FLAG,false);
+
+                    e.apply();
+                }
+            }
+        });
+        t.start();
+
         SharedPreferences sharedPreferences = this.getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
