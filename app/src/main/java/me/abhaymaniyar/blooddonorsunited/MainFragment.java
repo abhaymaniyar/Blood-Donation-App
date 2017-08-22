@@ -86,8 +86,8 @@ public class MainFragment extends Fragment {
                 // Get data associated with the specified position
                 // in the list (AdapterView)
                 String description = (String) parent.getItemAtPosition(position);
-                String[] strArray = description.split(",");
-                autocompleteView.setText(strArray[0]);
+//                String[] strArray = description.split(",");
+                autocompleteView.setText(description);
 //                Toast.makeText(getActivity(), description, Toast.LENGTH_SHORT).show();
             }
         });
