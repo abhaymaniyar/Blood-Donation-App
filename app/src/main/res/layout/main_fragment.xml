@@ -102,6 +102,8 @@
                             android:background="@drawable/custom_edittext"
                             android:ems="10"
                             android:gravity="center"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
                             android:hint="@string/enter_preferred_city"
                             android:inputType="textCapWords"
                             android:textColorHint="@color/editTextBg"
