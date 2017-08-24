@@ -84,9 +84,15 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
             }
         } else {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, new MainFragment(), "Main Fragment").commit();
-            setTitle("Search Donors");
-            navigationView.getMenu().getItem(0).setChecked(true);
+            String title = getTitle().toString();
+            if (title.equals("Update Info")){
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, new DonorDetailsFragment(), "Other Fragment").commit();
+                setTitle("Donor Details");
+            }else{
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, new MainFragment(), "Main Fragment").commit();
+                setTitle("Search Donors");
+                navigationView.getMenu().getItem(0).setChecked(true);
+            }
         }
     }
 

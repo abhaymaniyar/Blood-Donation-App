@@ -161,9 +161,9 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
         emergencyDonorSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
+                if (b) {
                     isAvaiable[0] = "Yes";
-                }else{
+                } else {
                     isAvaiable[0] = "No";
                 }
             }
@@ -185,7 +185,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                 boolean isEmailValid = Patterns.EMAIL_ADDRESS.matcher(donorEmail).matches();
 //                boolean isContactValid = Patterns.PHONE.matcher(donorContact).matches();
                 int contactNumberLength = donorContact.length();
-                Log.d(">>>>", "onClick: "+contactNumberLength);
+                Log.d(">>>>", "onClick: " + contactNumberLength);
                 final String isFrequentDonor = frequentDonor.getPrompt().toString();
 
 //               Check for User details validation and integrity
@@ -228,7 +228,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                         alertDialog.show();
                     }
                 } else {
-                    if(bloodGroup.equals("Select")){
+                    if (bloodGroup.equals("Select")) {
                         builder.setTitle("");
                         builder.setMessage("Please select a blood group.");
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -237,7 +237,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                                 dialogInterface.dismiss();
                             }
                         });
-                    }else if(donorName.equals("") || donorEmail.equals("") || donorCity.equals("")){
+                    } else if (donorName.equals("") || donorEmail.equals("") || donorCity.equals("")) {
                         builder.setTitle("");
                         builder.setMessage("Please fill all the details.");
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -246,7 +246,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                                 dialogInterface.dismiss();
                             }
                         });
-                    }else if(isFrequentDonor.equals("Select")){
+                    } else if (isFrequentDonor.equals("Select")) {
                         builder.setTitle("");
                         builder.setMessage("Please select a frequency option.");
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -311,7 +311,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                 });
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
-            } else if(s.equals("No internet")){
+            } else if (s.equals("No internet")) {
                 final SharedPreferences sharedPreferences = getContext().getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
                 final SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("isRegistered", false);
