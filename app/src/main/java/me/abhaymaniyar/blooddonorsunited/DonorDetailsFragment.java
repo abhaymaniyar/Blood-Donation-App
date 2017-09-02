@@ -1,9 +1,15 @@
 package me.abhaymaniyar.blooddonorsunited;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +20,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.UnknownHostException;
+
 import static android.content.Context.MODE_PRIVATE;
 
 /**
@@ -21,6 +36,9 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class DonorDetailsFragment extends Fragment {
+    ProgressDialog registerProgressDialog;
+    boolean isConnected = false;
+
     public DonorDetailsFragment() {
         super();
     }
@@ -141,7 +159,103 @@ public class DonorDetailsFragment extends Fragment {
                 finishEditingImageView.setVisibility(View.GONE);
             }
         });
+
+        registerProgressDialog = new ProgressDialog(getContext());
+        registerProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        registerProgressDialog.setIndeterminate(true);
+        registerProgressDialog.setCanceledOnTouchOutside(false);
+        registerProgressDialog.setMessage("Registering Donor...");
     }
 
+    private class AsyncRegister extends AsyncTask<String, String, String> {
+        @Override
+        protected void onPreExecute() {
+            registerProgressDialog.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            if (s.equals("true")) {
+//                Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Success!");
+                builder.setMessage("Donor Registration Successful");
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, new DonorDetailsFragment(), "Other Fragment").commit();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            } else if (s.equals("No internet")) {
+                final SharedPreferences sharedPreferences = getContext().getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
+                final SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("isRegistered", false);
+                editor.commit();
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("");
+                builder.setMessage("No Internet Connectivity.");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        registerProgressDialog.setCanceledOnTouchOutside(false);
+                        registerProgressDialog.hide();
+                        Fragment f = new MainFragment();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, f, "Main Fragment").commit();
+                        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+                        navigationView.setCheckedItem(R.id.nav_search);
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+            super.onPostExecute(s);
+            registerProgressDialog.hide();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            URL url = null;
+            try {
+                InetAddress inetAddress = InetAddress.getByName("google.com");
+                isConnected = !inetAddress.equals("");
+            } catch (UnknownHostException e) {
+                return "No internet";
+            }
+            try {
+                HttpURLConnection conn = null;
+                String uri = Uri.parse("http://ngoindex.info/donor_register.php").buildUpon().appendQueryParameter("bGroup", params[0])
+                        .appendQueryParameter("name", params[1])
+                        .appendQueryParameter("contact", params[2])
+                        .appendQueryParameter("email", params[3])
+                        .appendQueryParameter("city", params[4])
+                        .appendQueryParameter("isavailable", params[5])
+                        .appendQueryParameter("frequentdonor", params[6]).build().toString();
+                url = new URL(uri);
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setDoOutput(true);
+                conn.setDoInput(true);
+                conn.setChunkedStreamingMode(0);
+
+
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+                writer.write(String.valueOf(url));
+                writer.flush();
+                writer.close();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return "Exception";
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "Exception";
+            }
+            return "true";
+        }
+    }
 }
 
