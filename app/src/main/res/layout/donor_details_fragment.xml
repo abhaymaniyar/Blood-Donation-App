@@ -382,14 +382,14 @@
             </LinearLayout>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/update_information"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@color/redTextColor"
-            android:padding="10dp"
-            android:text="Update Information"
-            android:textColor="#FFFFFF" />
+        <!--<Button-->
+            <!--android:id="@+id/update_information"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:background="@color/redTextColor"-->
+            <!--android:padding="10dp"-->
+            <!--android:text="Update Information"-->
+            <!--android:textColor="#FFFFFF" />-->
     </LinearLayout>
 </ScrollView>

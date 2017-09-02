@@ -10,8 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -80,56 +80,68 @@ public class DonorDetailsFragment extends Fragment {
         availableTextView.setText(available);
         frequentTextView.setText(frequentDonor);
 
-        final Button updateBtn = (Button) getView().findViewById(R.id.update_information);
-        updateBtn.setOnClickListener(new View.OnClickListener() {
+        ActionBar customToobar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        final View view1 = customToobar.getCustomView();
+        final ImageView editImageView = view1.findViewById(R.id.edit_image_view);
+        final ImageView finishEditingImageView = (ImageView) view1.findViewById(R.id.finish_editing_image_view);
+
+        editImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (updateBtn.getText().toString().toLowerCase().equals("update information")) {
-                    nameEditText.setVisibility(View.VISIBLE);
-                    emailEditText.setVisibility(View.VISIBLE);
-                    contactEditText.setVisibility(View.VISIBLE);
-                    cityEditText.setVisibility(View.VISIBLE);
+//                if (i==0) {
+                nameEditText.setVisibility(View.VISIBLE);
+                emailEditText.setVisibility(View.VISIBLE);
+                contactEditText.setVisibility(View.VISIBLE);
+                cityEditText.setVisibility(View.VISIBLE);
 
-                    nameEditText.setText(nameTextView.getText().toString());
-                    emailEditText.setText(emailTextView.getText().toString());
-                    contactEditText.setText(contactTextView.getText().toString());
-                    cityEditText.setText(cityTextView.getText().toString());
+                nameEditText.setText(nameTextView.getText().toString());
+                emailEditText.setText(emailTextView.getText().toString());
+                contactEditText.setText(contactTextView.getText().toString());
+                cityEditText.setText(cityTextView.getText().toString());
 
-                    nameTextView.setVisibility(View.GONE);
-                    emailTextView.setVisibility(View.GONE);
-                    contactTextView.setVisibility(View.GONE);
-                    cityTextView.setVisibility(View.GONE);
+                nameTextView.setVisibility(View.GONE);
+                emailTextView.setVisibility(View.GONE);
+                contactTextView.setVisibility(View.GONE);
+                cityTextView.setVisibility(View.GONE);
 
-                    updateBtn.setText("Done");
-                    getActivity().setTitle("Update Info");
-                } else {
-                    nameEditText.setVisibility(View.GONE);
-                    emailEditText.setVisibility(View.GONE);
-                    contactEditText.setVisibility(View.GONE);
-                    cityEditText.setVisibility(View.GONE);
-
-                    String name = nameEditText.getText().toString();
-                    String email = emailEditText.getText().toString();
-                    String contact = contactEditText.getText().toString();
-                    String city = cityEditText.getText().toString();
-
-                    nameTextView.setText(name);
-                    emailTextView.setText(email);
-                    contactTextView.setText(contact);
-                    cityTextView.setText(city);
-
-                    nameTextView.setVisibility(View.VISIBLE);
-                    emailTextView.setVisibility(View.VISIBLE);
-                    contactTextView.setVisibility(View.VISIBLE);
-                    cityTextView.setVisibility(View.VISIBLE);
-
-                    updateBtn.setText("Update Information");
-                    getActivity().setTitle("Donor Details");
-                }
+                TextView t = view1.findViewById(R.id.custom_toolbar_title);
+                t.setText("Update Details");
+                editImageView.setVisibility(View.GONE);
+                finishEditingImageView.setVisibility(View.VISIBLE);
             }
         });
 
+        finishEditingImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nameEditText.setVisibility(View.GONE);
+                emailEditText.setVisibility(View.GONE);
+                contactEditText.setVisibility(View.GONE);
+                cityEditText.setVisibility(View.GONE);
+
+                String name = nameEditText.getText().toString();
+                String email = emailEditText.getText().toString();
+                String contact = contactEditText.getText().toString();
+                String city = cityEditText.getText().toString();
+
+                nameTextView.setText(name);
+                emailTextView.setText(email);
+                contactTextView.setText(contact);
+                cityTextView.setText(city);
+
+                nameTextView.setVisibility(View.VISIBLE);
+                emailTextView.setVisibility(View.VISIBLE);
+                contactTextView.setVisibility(View.VISIBLE);
+                cityTextView.setVisibility(View.VISIBLE);
+
+                TextView t = view1.findViewById(R.id.custom_toolbar_title);
+                t.setText("Donor Details");
+
+                editImageView.setVisibility(View.VISIBLE);
+                finishEditingImageView.setVisibility(View.GONE);
+            }
+        });
     }
 
-
 }
+
