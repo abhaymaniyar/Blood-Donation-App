@@ -13,6 +13,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class DonorDetailsFragment extends Fragment {
     ProgressDialog registerProgressDialog;
     boolean isConnected = false;
-
+    String previous_email = null;
     public DonorDetailsFragment() {
         super();
     }
@@ -76,7 +77,9 @@ public class DonorDetailsFragment extends Fragment {
         String bGroup = sharedPreferences.getString("donor_blood_group_details", "Not yet Registered");
         String city = sharedPreferences.getString("donor_city_details", "Not yet Registered");
         String available = sharedPreferences.getString("donor_availablity_details", "Not yet Registered");
-        String frequentDonor = sharedPreferences.getString("donor_frequency_details", "Not yet Registered");
+        final String frequentDonor = sharedPreferences.getString("donor_frequency_details", "Not yet Registered");
+        previous_email = email;
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
 
         final TextView nameTextView = (TextView) getView().findViewById(R.id.donor_name);
         final TextView emailTextView = (TextView) getView().findViewById(R.id.donor_email);
@@ -89,6 +92,9 @@ public class DonorDetailsFragment extends Fragment {
         final EditText emailEditText = (EditText) getView().findViewById(R.id.donor_email_edittext);
         final EditText contactEditText = (EditText) getView().findViewById(R.id.donor_contact_number_edittext);
         final EditText cityEditText = (EditText) getView().findViewById(R.id.donor_city_edittext);
+        final TextView isAvailableText = (TextView) getView().findViewById(R.id.is_available);
+        final TextView isFrequentDonorText = (TextView) getView().findViewById(R.id.is_frequent_donor);
+        final TextView bloodGroupText = (TextView) getView().findViewById(R.id.donor_blood_group);
 
         nameTextView.setText(name);
         emailTextView.setText(email);
@@ -141,11 +147,27 @@ public class DonorDetailsFragment extends Fragment {
                 String email = emailEditText.getText().toString();
                 String contact = contactEditText.getText().toString();
                 String city = cityEditText.getText().toString();
+                String isAvailable = isAvailableText.getText().toString();
+                String isFrequentDonor = isFrequentDonorText.getText().toString();
+                String bloodGroup = bloodGroupText.getText().toString();
+
+                new AsyncRegister().execute(previous_email, bloodGroup, name, contact, email, city, isAvailable, isFrequentDonor);
+                //                                save registration status in SharedPreferences
+                editor.putBoolean("isRegistered", true);
+                editor.putString("donor_name_details", name);
+                editor.putString("donor_email_details", email);
+                editor.putString("donor_contact_details", contact);
+                editor.putString("donor_blood_group_details", bloodGroup);
+                editor.putString("donor_city_details", city);
+                editor.putString("donor_frequency_details", isFrequentDonor);
+                editor.putString("donor_availablity_details", isAvailable);
+                editor.commit();
 
                 nameTextView.setText(name);
                 emailTextView.setText(email);
                 contactTextView.setText(contact);
                 cityTextView.setText(city);
+                
 
                 nameTextView.setVisibility(View.VISIBLE);
                 emailTextView.setVisibility(View.VISIBLE);
@@ -164,7 +186,7 @@ public class DonorDetailsFragment extends Fragment {
         registerProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         registerProgressDialog.setIndeterminate(true);
         registerProgressDialog.setCanceledOnTouchOutside(false);
-        registerProgressDialog.setMessage("Registering Donor...");
+        registerProgressDialog.setMessage("Updating Details...");
     }
 
     private class AsyncRegister extends AsyncTask<String, String, String> {
@@ -180,7 +202,7 @@ public class DonorDetailsFragment extends Fragment {
 //                Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Success!");
-                builder.setMessage("Donor Registration Successful");
+                builder.setMessage("Donor Details Updated");
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -228,13 +250,15 @@ public class DonorDetailsFragment extends Fragment {
             }
             try {
                 HttpURLConnection conn = null;
-                String uri = Uri.parse("http://ngoindex.info/donor_register.php").buildUpon().appendQueryParameter("bGroup", params[0])
-                        .appendQueryParameter("name", params[1])
-                        .appendQueryParameter("contact", params[2])
-                        .appendQueryParameter("email", params[3])
-                        .appendQueryParameter("city", params[4])
-                        .appendQueryParameter("isavailable", params[5])
-                        .appendQueryParameter("frequentdonor", params[6]).build().toString();
+                String uri = Uri.parse("http://ngoindex.info/updateInfo.php").buildUpon().appendQueryParameter("previous_email", params[0])
+                        .appendQueryParameter("bGroup", params[1])
+                        .appendQueryParameter("name", params[2])
+                        .appendQueryParameter("contact", params[3])
+                        .appendQueryParameter("email", params[4])
+                        .appendQueryParameter("city", params[5])
+                        .appendQueryParameter("isavailable", params[6])
+                        .appendQueryParameter("frequentdonor", params[7]).build().toString();
+                Log.d(">>>>", "doInBackground: "+uri);
                 url = new URL(uri);
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
