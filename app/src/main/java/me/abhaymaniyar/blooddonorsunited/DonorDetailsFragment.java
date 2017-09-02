@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -167,7 +166,7 @@ public class DonorDetailsFragment extends Fragment {
                 emailTextView.setText(email);
                 contactTextView.setText(contact);
                 cityTextView.setText(city);
-                
+
 
                 nameTextView.setVisibility(View.VISIBLE);
                 emailTextView.setVisibility(View.VISIBLE);
@@ -226,10 +225,10 @@ public class DonorDetailsFragment extends Fragment {
                         dialogInterface.dismiss();
                         registerProgressDialog.setCanceledOnTouchOutside(false);
                         registerProgressDialog.hide();
-                        Fragment f = new MainFragment();
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, f, "Main Fragment").commit();
-                        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
-                        navigationView.setCheckedItem(R.id.nav_search);
+//                        Fragment f = new DonorDetailsFragment();
+//                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, f, "Main Fragment").commit();
+//                        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+//                        navigationView.setCheckedItem(R.id.nav_search);
                     }
                 });
                 AlertDialog alertDialog = builder.create();
