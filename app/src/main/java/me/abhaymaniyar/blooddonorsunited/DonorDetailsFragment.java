@@ -43,7 +43,7 @@ public class DonorDetailsFragment extends Fragment {
         getActivity().setTitle("Donor Details");
         LayoutInflater l = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = l.inflate(R.layout.tool_bar, null);
-        TextView textView = (TextView) v.findViewById(R.id.title);
+        TextView textView = (TextView) v.findViewById(R.id.custom_toolbar_title);
         textView.setText("Donor Details");
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);

@@ -10,10 +10,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity
     int i = 0;
     private Fragment fragmentOther;
     private FragmentTransaction fragmentTransaction;
+    ActionBar customToobar = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +94,12 @@ public class MainActivity extends AppCompatActivity
                 setTitle("Donor Details");
             }else{
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, new MainFragment(), "Main Fragment").commit();
-                setTitle("Search Donors");
+                customToobar = this.getSupportActionBar();
+                View v = customToobar.getCustomView();
+                v.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
+                TextView t = v.findViewById(R.id.custom_toolbar_title);
+                t.setText("Search Donors");
+//                setTitle("Search Donors");
                 navigationView.getMenu().getItem(0).setChecked(true);
             }
         }
@@ -104,7 +113,11 @@ public class MainActivity extends AppCompatActivity
         String TAG = ">>>>";
         if (id == R.id.nav_search) {
             fragmentOther = new MainFragment();
-            setTitle("Search Donors");
+            customToobar = this.getSupportActionBar();
+            View v = customToobar.getCustomView();
+            v.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
+            TextView t = v.findViewById(R.id.custom_toolbar_title);
+            t.setText("Search Donors");
         } else if (id == R.id.nav_register) {
             SharedPreferences sharedPreferences = getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
             boolean isRegistered = sharedPreferences.getBoolean("isRegistered", false);
@@ -113,11 +126,20 @@ public class MainActivity extends AppCompatActivity
                 setTitle("Donor Details");
             } else {
                 fragmentOther = new RegisterFragment();
-                setTitle("Register as a Donor");
+                customToobar = this.getSupportActionBar();
+                View v = customToobar.getCustomView();
+                v.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
+                TextView t = v.findViewById(R.id.custom_toolbar_title);
+                t.setText("Register as a Donor");
+//                setTitle("Register as a Donor");
             }
         } else if (id == R.id.nav_faq) {
+            customToobar = this.getSupportActionBar();
+            View v = customToobar.getCustomView();
+            v.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
+            TextView t = v.findViewById(R.id.custom_toolbar_title);
+            t.setText("Blood Donation FAQ");
             fragmentOther = new FaqFragment();
-            setTitle("Blood Donation FAQ");
         } else if (id == R.id.nav_share) {
             Intent i = new Intent();
             i.setType("text/plain");
@@ -131,11 +153,21 @@ public class MainActivity extends AppCompatActivity
             i.putExtra(Intent.EXTRA_TEXT, sAux);
             this.startActivity(i);
             fragmentOther = new MainFragment();
-            setTitle("Search Donors");
+            customToobar = this.getSupportActionBar();
+            View v = customToobar.getCustomView();
+            v.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
+            TextView t = v.findViewById(R.id.custom_toolbar_title);
+            t.setText("Search Donors");
+//            setTitle("Search Donors");
             navigationView.getMenu().getItem(0).setChecked(true);
         } else if (id == R.id.about_us) {
             fragmentOther = new AboutUsFragment();
-            setTitle("About Me");
+            customToobar = this.getSupportActionBar();
+            View v = customToobar.getCustomView();
+            v.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
+            TextView t = v.findViewById(R.id.custom_toolbar_title);
+            t.setText("About Me");
+//            setTitle("About Me");
         }
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
