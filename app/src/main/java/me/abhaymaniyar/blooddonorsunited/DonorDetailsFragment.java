@@ -1,9 +1,12 @@
 package me.abhaymaniyar.blooddonorsunited;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +41,16 @@ public class DonorDetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().setTitle("Donor Details");
+        LayoutInflater l = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = l.inflate(R.layout.tool_bar, null);
+        TextView textView = (TextView) v.findViewById(R.id.title);
+        textView.setText("Donor Details");
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setCustomView(v);
+        //        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        //        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("registrationStatus", MODE_PRIVATE);
         String name = sharedPreferences.getString("donor_name_details", "Not yet Registered");
         String email = sharedPreferences.getString("donor_email_details", "Not yet Registered");
