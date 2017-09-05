@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +17,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -27,6 +31,11 @@ import java.util.List;
  */
 
 public class MainFragment extends Fragment {
+    ActionBar customToobar;
+    View view1;
+    ImageView editImageView;
+    ImageView finishEditingImageView;
+
     public MainFragment() {
         super();
     }
@@ -46,7 +55,13 @@ public class MainFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
-
+        customToobar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        view1 = customToobar.getCustomView();
+        editImageView = view1.findViewById(R.id.edit_image_view);
+        finishEditingImageView = (ImageView) view1.findViewById(R.id.finish_editing_image_view);
+        editImageView.setVisibility(View.GONE);
+        TextView t = view1.findViewById(R.id.custom_toolbar_title);
+        t.setText("Search Donors");
         final Spinner spinner = (Spinner) getView().findViewById(R.id.search_spinner);
         final List<String> bloodGroups = new ArrayList<String>();
         bloodGroups.add("Select");
@@ -99,7 +114,7 @@ public class MainFragment extends Fragment {
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(spinner.getPrompt().equals("Select")){
+                if (spinner.getPrompt().equals("Select")) {
                     builder.setTitle("");
                     builder.setMessage("Please select a blood group.");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -110,7 +125,7 @@ public class MainFragment extends Fragment {
                     });
                     AlertDialog alertDialog = builder.create();
                     alertDialog.show();
-                }else{
+                } else {
                     final Bundle bundle = new Bundle();
                     EditText cityEditText = (EditText) getView().findViewById(R.id.search_city);
                     String city = cityEditText.getText().toString();
