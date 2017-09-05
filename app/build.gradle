@@ -7,8 +7,8 @@ android {
         applicationId "me.abhay.blooddonationapp"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 33
-        versionName "1.33"
+        versionCode 34
+        versionName "1.34"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

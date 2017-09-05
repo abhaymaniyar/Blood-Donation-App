@@ -1,10 +1,13 @@
 package me.abhaymaniyar.blooddonorsunited;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +38,14 @@ public class AboutUsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        LayoutInflater l = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = l.inflate(R.layout.tool_bar, null);
+        TextView textView = (TextView) v.findViewById(R.id.custom_toolbar_title);
+        textView.setText("About Me");
+        v.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setCustomView(v);
 
         TextView details = (TextView) getView().findViewById(R.id.details);
         details.setText("Hello there! \n" +
@@ -43,7 +54,7 @@ public class AboutUsFragment extends Fragment {
                 "Keeping this app installed will allow you to help even some random guy by a simple search for potential donors on this app.\n" +
                 "And I am not integrating advertisments on this app so you don't get any useless notifications on your phone.\n" +
                 "This app is like a dialer, you only use it when you or someone you know needs it.\n" +
-                "I have open sourced this app, so if you want to improve this app or find any bug feel free to raise an issue on the GitHub repo linked below.\n"+
+                "I have open sourced this app, so if you want to improve this app or find any bug feel free to raise an issue on the GitHub repo linked below.\n" +
                 "You can also contact me on my email by clicking below icon.");
 
         LinearLayout githubIcon = (LinearLayout) getView().findViewById(R.id.github_icon);

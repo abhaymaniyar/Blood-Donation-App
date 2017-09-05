@@ -55,13 +55,14 @@ public class MainFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
-        customToobar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        view1 = customToobar.getCustomView();
-        editImageView = view1.findViewById(R.id.edit_image_view);
-        finishEditingImageView = (ImageView) view1.findViewById(R.id.finish_editing_image_view);
-        editImageView.setVisibility(View.GONE);
-        TextView t = view1.findViewById(R.id.custom_toolbar_title);
-        t.setText("Search Donors");
+        LayoutInflater l = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = l.inflate(R.layout.tool_bar, null);
+        TextView textView = (TextView) v.findViewById(R.id.custom_toolbar_title);
+        textView.setText("Search Donors");
+        v.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setCustomView(v);
         final Spinner spinner = (Spinner) getView().findViewById(R.id.search_spinner);
         final List<String> bloodGroups = new ArrayList<String>();
         bloodGroups.add("Select");

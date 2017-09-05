@@ -1,14 +1,18 @@
 package me.abhaymaniyar.blooddonorsunited;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +40,15 @@ public class FaqFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        LayoutInflater l = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = l.inflate(R.layout.tool_bar, null);
+        TextView textView = (TextView) v.findViewById(R.id.custom_toolbar_title);
+        textView.setText("Blood Donation FAQ");
+        v.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setCustomView(v);
 
         List<Faq> faqList = new ArrayList<Faq>();
         faqList.add(new Faq("Who can donate blood?", "1. A person of 17 years of age and older.\n2. A person in good physical health\n" +

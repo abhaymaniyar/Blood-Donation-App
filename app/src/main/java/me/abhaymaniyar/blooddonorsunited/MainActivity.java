@@ -125,10 +125,10 @@ public class MainActivity extends AppCompatActivity
         String TAG = ">>>>";
         if (id == R.id.nav_search) {
             fragmentOther = new MainFragment();
-            View cutomToolbarView = customToobar.getCustomView();
-            cutomToolbarView.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
-            TextView t = cutomToolbarView.findViewById(R.id.custom_toolbar_title);
-            t.setText("Search Donors");
+//            View cutomToolbarView = customToobar.getCustomView();
+//            cutomToolbarView.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
+//            TextView t = cutomToolbarView.findViewById(R.id.custom_toolbar_title);
+//            t.setText("Search Donors");
         } else if (id == R.id.nav_register) {
             SharedPreferences sharedPreferences = getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
             boolean isRegistered = sharedPreferences.getBoolean("isRegistered", false);
@@ -137,19 +137,19 @@ public class MainActivity extends AppCompatActivity
                 setTitle("Donor Details");
             } else {
                 fragmentOther = new RegisterFragment();
-                customToobar = this.getSupportActionBar();
-                View customToolbarView = customToobar.getCustomView();
-                customToolbarView.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
-                TextView t = customToolbarView.findViewById(R.id.custom_toolbar_title);
-                t.setText("Register as a Donor");
+//                customToobar = this.getSupportActionBar();
+//                View customToolbarView = customToobar.getCustomView();
+//                customToolbarView.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
+//                TextView t = customToolbarView.findViewById(R.id.custom_toolbar_title);
+//                t.setText("Register as a Donor");
 //                setTitle("Register as a Donor");
             }
         } else if (id == R.id.nav_faq) {
-            customToobar = this.getSupportActionBar();
-            View customToolbarView = customToobar.getCustomView();
-            customToolbarView.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
-            TextView t = customToolbarView.findViewById(R.id.custom_toolbar_title);
-            t.setText("Blood Donation FAQ");
+//            customToobar = this.getSupportActionBar();
+//            View customToolbarView = customToobar.getCustomView();
+//            customToolbarView.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
+//            TextView t = customToolbarView.findViewById(R.id.custom_toolbar_title);
+//            t.setText("Blood Donation FAQ");
             fragmentOther = new FaqFragment();
         } else if (id == R.id.nav_share) {
             Intent i = new Intent();
@@ -165,20 +165,24 @@ public class MainActivity extends AppCompatActivity
             this.startActivity(i);
             fragmentOther = new MainFragment();
 //            customToobar = this.getSupportActionBar();
-            View customToolbarView = customToobar.getCustomView();
-            customToolbarView.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
-            TextView t = customToolbarView.findViewById(R.id.custom_toolbar_title);
-            t.setText("Search Donors");
+//            View customToolbarView = customToobar.getCustomView();
+//            customToolbarView.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
+//            TextView t = customToolbarView.findViewById(R.id.custom_toolbar_title);
+//            t.setText("Search Donors");
 //            setTitle("Search Donors");
             navigationView.getMenu().getItem(0).setChecked(true);
         } else if (id == R.id.about_us) {
             fragmentOther = new AboutUsFragment();
 //            customToobar = this.getSupportActionBar();
-            View customToolbarView = customToobar.getCustomView();
-            customToolbarView.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
-            TextView t = customToolbarView.findViewById(R.id.custom_toolbar_title);
-            t.setText("About Me");
+//            View customToolbarView = customToobar.getCustomView();
+//            customToolbarView.findViewById(R.id.edit_image_view).setVisibility(View.GONE);
+//            TextView t = customToolbarView.findViewById(R.id.custom_toolbar_title);
+//            t.setText("About Me");
 //            setTitle("About Me");
+//            navigationView.getMenu().getItem(3).setChecked(true);
+//            item.setChe
+//            Log.d(">>>>", "onNavigationItemSelected: "+navigationView.getMenu().getItem(4).getTitle());
+            navigationView.getMenu().getItem(0).setChecked(true);
         }
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
