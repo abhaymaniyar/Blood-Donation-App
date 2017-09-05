@@ -39,9 +39,45 @@ public class DonorDetailsFragment extends Fragment {
     ProgressDialog registerProgressDialog;
     boolean isConnected = false;
     String previous_email = null;
+
     public DonorDetailsFragment() {
         super();
     }
+
+    final String[] name = new String[1];
+    final String[] email = new String[1];
+    final String[] contact = new String[1];
+    final String[] city = new String[1];
+    final String[] isAvailable = new String[1];
+    final String[] isFrequentDonor = new String[1];
+    final String[] bloodGroup = new String[1];
+    String savedName;
+    String savedEmail;
+    String savedContact;
+    String savedBGroup;
+    String savedCity;
+    String savedAvailable;
+    String savedFrequentDonor;
+
+    TextView nameTextView;
+    TextView emailTextView;
+    TextView contactTextView;
+    TextView bGroupTextView;
+    TextView cityTextView;
+    TextView availableTextView;
+    TextView frequentTextView;
+    EditText nameEditText;
+    EditText emailEditText;
+    EditText contactEditText;
+    EditText cityEditText;
+    TextView isAvailableText;
+    TextView isFrequentDonorText;
+    TextView bloodGroupText;
+
+    ActionBar customToobar;
+    View view1;
+    ImageView editImageView;
+    ImageView finishEditingImageView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,6 +93,20 @@ public class DonorDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        nameTextView = (TextView) getView().findViewById(R.id.donor_name);
+        emailTextView = (TextView) getView().findViewById(R.id.donor_email);
+        contactTextView = (TextView) getView().findViewById(R.id.donor_contact_number);
+        bGroupTextView = (TextView) getView().findViewById(R.id.donor_blood_group);
+        cityTextView = (TextView) getView().findViewById(R.id.donor_city);
+        availableTextView = (TextView) getView().findViewById(R.id.is_available);
+        frequentTextView = (TextView) getView().findViewById(R.id.is_frequent_donor);
+        nameEditText = (EditText) getView().findViewById(R.id.donor_name_edittext);
+        emailEditText = (EditText) getView().findViewById(R.id.donor_email_edittext);
+        contactEditText = (EditText) getView().findViewById(R.id.donor_contact_number_edittext);
+        cityEditText = (EditText) getView().findViewById(R.id.donor_city_edittext);
+        isAvailableText = (TextView) getView().findViewById(R.id.is_available);
+        isFrequentDonorText = (TextView) getView().findViewById(R.id.is_frequent_donor);
+        bloodGroupText = (TextView) getView().findViewById(R.id.donor_blood_group);
 
         getActivity().setTitle("Donor Details");
         LayoutInflater l = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -68,45 +118,29 @@ public class DonorDetailsFragment extends Fragment {
         actionBar.setCustomView(v);
         //        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         //        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("registrationStatus", MODE_PRIVATE);
-        String name = sharedPreferences.getString("donor_name_details", "Not yet Registered");
-        String email = sharedPreferences.getString("donor_email_details", "Not yet Registered");
-        String contact = sharedPreferences.getString("donor_contact_details", "Not yet Registered");
-        String bGroup = sharedPreferences.getString("donor_blood_group_details", "Not yet Registered");
-        String city = sharedPreferences.getString("donor_city_details", "Not yet Registered");
-        String available = sharedPreferences.getString("donor_availablity_details", "Not yet Registered");
-        final String frequentDonor = sharedPreferences.getString("donor_frequency_details", "Not yet Registered");
-        previous_email = email;
+        savedName = sharedPreferences.getString("donor_name_details", "Not yet Registered");
+        savedEmail = sharedPreferences.getString("donor_email_details", "Not yet Registered");
+        savedContact = sharedPreferences.getString("donor_contact_details", "Not yet Registered");
+        savedBGroup = sharedPreferences.getString("donor_blood_group_details", "Not yet Registered");
+        savedCity = sharedPreferences.getString("donor_city_details", "Not yet Registered");
+        savedAvailable = sharedPreferences.getString("donor_availablity_details", "Not yet Registered");
+        savedFrequentDonor = sharedPreferences.getString("donor_frequency_details", "Not yet Registered");
+        previous_email = savedEmail;
         final SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        final TextView nameTextView = (TextView) getView().findViewById(R.id.donor_name);
-        final TextView emailTextView = (TextView) getView().findViewById(R.id.donor_email);
-        final TextView contactTextView = (TextView) getView().findViewById(R.id.donor_contact_number);
-        TextView bGroupTextView = (TextView) getView().findViewById(R.id.donor_blood_group);
-        final TextView cityTextView = (TextView) getView().findViewById(R.id.donor_city);
-        TextView availableTextView = (TextView) getView().findViewById(R.id.is_available);
-        TextView frequentTextView = (TextView) getView().findViewById(R.id.is_frequent_donor);
-        final EditText nameEditText = (EditText) getView().findViewById(R.id.donor_name_edittext);
-        final EditText emailEditText = (EditText) getView().findViewById(R.id.donor_email_edittext);
-        final EditText contactEditText = (EditText) getView().findViewById(R.id.donor_contact_number_edittext);
-        final EditText cityEditText = (EditText) getView().findViewById(R.id.donor_city_edittext);
-        final TextView isAvailableText = (TextView) getView().findViewById(R.id.is_available);
-        final TextView isFrequentDonorText = (TextView) getView().findViewById(R.id.is_frequent_donor);
-        final TextView bloodGroupText = (TextView) getView().findViewById(R.id.donor_blood_group);
+        nameTextView.setText(savedName);
+        emailTextView.setText(savedEmail);
+        contactTextView.setText(savedContact);
+        bGroupTextView.setText(savedBGroup);
+        cityTextView.setText(savedCity);
+        availableTextView.setText(savedAvailable);
+        frequentTextView.setText(savedFrequentDonor);
 
-        nameTextView.setText(name);
-        emailTextView.setText(email);
-        contactTextView.setText(contact);
-        bGroupTextView.setText(bGroup);
-        cityTextView.setText(city);
-        availableTextView.setText(available);
-        frequentTextView.setText(frequentDonor);
-
-        ActionBar customToobar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        final View view1 = customToobar.getCustomView();
-        final ImageView editImageView = view1.findViewById(R.id.edit_image_view);
-        final ImageView finishEditingImageView = (ImageView) view1.findViewById(R.id.finish_editing_image_view);
+        customToobar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        view1 = customToobar.getCustomView();
+        editImageView = view1.findViewById(R.id.edit_image_view);
+        finishEditingImageView = (ImageView) view1.findViewById(R.id.finish_editing_image_view);
 
         editImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,42 +176,16 @@ public class DonorDetailsFragment extends Fragment {
                 contactEditText.setVisibility(View.GONE);
                 cityEditText.setVisibility(View.GONE);
 
-                String name = nameEditText.getText().toString();
-                String email = emailEditText.getText().toString();
-                String contact = contactEditText.getText().toString();
-                String city = cityEditText.getText().toString();
-                String isAvailable = isAvailableText.getText().toString();
-                String isFrequentDonor = isFrequentDonorText.getText().toString();
-                String bloodGroup = bloodGroupText.getText().toString();
+                name[0] = nameEditText.getText().toString();
+                email[0] = emailEditText.getText().toString();
+                contact[0] = contactEditText.getText().toString();
+                city[0] = cityEditText.getText().toString();
+                isAvailable[0] = isAvailableText.getText().toString();
+                isFrequentDonor[0] = isFrequentDonorText.getText().toString();
+                bloodGroup[0] = bloodGroupText.getText().toString();
 
-                new AsyncRegister().execute(previous_email, bloodGroup, name, contact, email, city, isAvailable, isFrequentDonor);
+                new AsyncRegister().execute(previous_email, bloodGroup[0], name[0], contact[0], email[0], city[0], isAvailable[0], isFrequentDonor[0]);
                 //                                save registration status in SharedPreferences
-                editor.putBoolean("isRegistered", true);
-                editor.putString("donor_name_details", name);
-                editor.putString("donor_email_details", email);
-                editor.putString("donor_contact_details", contact);
-                editor.putString("donor_blood_group_details", bloodGroup);
-                editor.putString("donor_city_details", city);
-                editor.putString("donor_frequency_details", isFrequentDonor);
-                editor.putString("donor_availablity_details", isAvailable);
-                editor.commit();
-
-                nameTextView.setText(name);
-                emailTextView.setText(email);
-                contactTextView.setText(contact);
-                cityTextView.setText(city);
-
-
-                nameTextView.setVisibility(View.VISIBLE);
-                emailTextView.setVisibility(View.VISIBLE);
-                contactTextView.setVisibility(View.VISIBLE);
-                cityTextView.setVisibility(View.VISIBLE);
-
-                TextView t = view1.findViewById(R.id.custom_toolbar_title);
-                t.setText("Donor Details");
-
-                editImageView.setVisibility(View.VISIBLE);
-                finishEditingImageView.setVisibility(View.GONE);
             }
         });
 
@@ -195,6 +203,9 @@ public class DonorDetailsFragment extends Fragment {
             super.onPreExecute();
         }
 
+        final SharedPreferences sharedPreferences = getContext().getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+
         @Override
         protected void onPostExecute(String s) {
             if (s.equals("true")) {
@@ -206,14 +217,38 @@ public class DonorDetailsFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
+                        editor.putBoolean("isRegistered", true);
+                        editor.putString("donor_name_details", name[0]);
+                        editor.putString("donor_email_details", email[0]);
+                        editor.putString("donor_contact_details", contact[0]);
+                        editor.putString("donor_blood_group_details", bloodGroup[0]);
+                        editor.putString("donor_city_details", city[0]);
+                        editor.putString("donor_frequency_details", isFrequentDonor[0]);
+                        editor.putString("donor_availablity_details", isAvailable[0]);
+                        editor.commit();
+
+                        nameTextView.setText(name[0]);
+                        emailTextView.setText(email[0]);
+                        contactTextView.setText(contact[0]);
+                        cityTextView.setText(city[0]);
+
+
+                        nameTextView.setVisibility(View.VISIBLE);
+                        emailTextView.setVisibility(View.VISIBLE);
+                        contactTextView.setVisibility(View.VISIBLE);
+                        cityTextView.setVisibility(View.VISIBLE);
+
+                        TextView t = getActivity().findViewById(R.id.custom_toolbar_title);
+                        t.setText("Donor Details");
+
+                        editImageView.setVisibility(View.VISIBLE);
+                        finishEditingImageView.setVisibility(View.GONE);
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, new DonorDetailsFragment(), "Other Fragment").commit();
                     }
                 });
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
             } else if (s.equals("No internet")) {
-                final SharedPreferences sharedPreferences = getContext().getSharedPreferences("registrationStatus", Context.MODE_PRIVATE);
-                final SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("isRegistered", false);
                 editor.commit();
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -223,12 +258,36 @@ public class DonorDetailsFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
+                        editor.putBoolean("isRegistered", true);
+                        editor.putString("donor_name_details", name[0]);
+                        editor.putString("donor_email_details", email[0]);
+                        editor.putString("donor_contact_details", contact[0]);
+                        editor.putString("donor_blood_group_details", bloodGroup[0]);
+                        editor.putString("donor_city_details", city[0]);
+                        editor.putString("donor_frequency_details", isFrequentDonor[0]);
+                        editor.putString("donor_availablity_details", isAvailable[0]);
                         registerProgressDialog.setCanceledOnTouchOutside(false);
                         registerProgressDialog.hide();
 //                        Fragment f = new DonorDetailsFragment();
 //                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, f, "Main Fragment").commit();
 //                        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
 //                        navigationView.setCheckedItem(R.id.nav_search);
+                        nameTextView.setText(savedName);
+                        emailTextView.setText(savedEmail);
+                        contactTextView.setText(savedContact);
+                        cityTextView.setText(savedCity);
+
+
+                        nameTextView.setVisibility(View.VISIBLE);
+                        emailTextView.setVisibility(View.VISIBLE);
+                        contactTextView.setVisibility(View.VISIBLE);
+                        cityTextView.setVisibility(View.VISIBLE);
+
+                        TextView t = getActivity().findViewById(R.id.custom_toolbar_title);
+                        t.setText("Donor Details");
+
+                        editImageView.setVisibility(View.VISIBLE);
+                        finishEditingImageView.setVisibility(View.GONE);
                     }
                 });
                 AlertDialog alertDialog = builder.create();
@@ -257,7 +316,7 @@ public class DonorDetailsFragment extends Fragment {
                         .appendQueryParameter("city", params[5])
                         .appendQueryParameter("isavailable", params[6])
                         .appendQueryParameter("frequentdonor", params[7]).build().toString();
-                Log.d(">>>>", "doInBackground: "+uri);
+                Log.d(">>>>", "doInBackground: " + uri);
                 url = new URL(uri);
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
