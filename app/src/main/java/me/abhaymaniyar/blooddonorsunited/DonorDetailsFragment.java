@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -69,7 +71,7 @@ public class DonorDetailsFragment extends Fragment {
     EditText nameEditText;
     EditText emailEditText;
     EditText contactEditText;
-    EditText cityEditText;
+    AutoCompleteTextView cityEditText;
     TextView isAvailableText;
     TextView isFrequentDonorText;
     TextView bloodGroupText;
@@ -103,10 +105,19 @@ public class DonorDetailsFragment extends Fragment {
         nameEditText = (EditText) getView().findViewById(R.id.donor_name_edittext);
         emailEditText = (EditText) getView().findViewById(R.id.donor_email_edittext);
         contactEditText = (EditText) getView().findViewById(R.id.donor_contact_number_edittext);
-        cityEditText = (EditText) getView().findViewById(R.id.donor_city_edittext);
+        cityEditText = (AutoCompleteTextView) getView().findViewById(R.id.donor_city_edittext);
         isAvailableText = (TextView) getView().findViewById(R.id.is_available);
         isFrequentDonorText = (TextView) getView().findViewById(R.id.is_frequent_donor);
         bloodGroupText = (TextView) getView().findViewById(R.id.donor_blood_group);
+
+        cityEditText.setAdapter(new PlacesAutoCompleteAdapter(getActivity(), R.layout.autocomplete_list_item));
+        cityEditText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String description = (String) adapterView.getItemAtPosition(i);
+                cityEditText.setText(description);
+            }
+        });
 
         getActivity().setTitle("Donor Details");
         LayoutInflater l = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);

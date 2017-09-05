@@ -120,9 +120,9 @@
                     android:id="@+id/donor_name_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
                     android:background="@drawable/custom_edittext"
                     android:padding="10dp"
+                    android:textSize="15sp"
                     android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
@@ -174,9 +174,9 @@
                     android:id="@+id/donor_contact_number_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
                     android:background="@drawable/custom_edittext"
                     android:padding="10dp"
+                    android:textSize="15sp"
                     android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
@@ -228,9 +228,9 @@
                     android:id="@+id/donor_email_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
                     android:background="@drawable/custom_edittext"
                     android:padding="10dp"
+                    android:textSize="15sp"
                     android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
@@ -259,11 +259,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:paddingTop="5dp"
+                android:orientation="vertical"
                 android:paddingBottom="5dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:orientation="vertical">
+                android:paddingTop="5dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -281,13 +281,14 @@
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/donor_city_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:padding="10dp"
                     android:background="@drawable/custom_edittext"
+                    android:inputType="textCapWords"
+                    android:padding="10dp"
+                    android:textSize="15sp"
                     android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
@@ -383,13 +384,13 @@
         </LinearLayout>
 
         <!--<Button-->
-            <!--android:id="@+id/update_information"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:background="@color/redTextColor"-->
-            <!--android:padding="10dp"-->
-            <!--android:text="Update Information"-->
-            <!--android:textColor="#FFFFFF" />-->
+        <!--android:id="@+id/update_information"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:background="@color/redTextColor"-->
+        <!--android:padding="10dp"-->
+        <!--android:text="Update Information"-->
+        <!--android:textColor="#FFFFFF" />-->
     </LinearLayout>
 </ScrollView>
